@@ -1,0 +1,235 @@
+﻿
+
+@using LampNet.Models
+@using System.Collections
+@model LampNet.Models.TBL_SITE
+@{
+    Layout = "~/Views/Shared/ManagementCenter_Layout.cshtml";
+    ViewBag.Title = "SiteUpdate";
+}
+@{
+    TBL_SITE[] array = ViewBag.array as TBL_SITE[];
+    TBL_SITE[] allInfo = ViewBag.allInfo as TBL_SITE[];
+}
+
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user" />
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="../SiteManagement/Index">站点管理 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../AmmeterManagement/Index">电表管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../UserManagement/Index">用户管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../LifeManagement/Index">生命周期 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../SettingManagement/Index">系统设置 <i></i></a>
+        </li>
+    </ul>
+    <!--三级菜单-->
+    <div class="shade">
+        <ul class="offset_left"></ul>
+    </div>
+</nav>
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+    <!--搜索栏-->
+    <div class="page-toolbar">
+
+        <div class="k-search">
+            <form action="~/SiteManagement/SiteSelect" method="post" autocomplete="off">
+                <span class="query">
+                    <span style="float: right">
+                        <span style="color:#333">
+                            站点：
+                            <select name="siteName">
+                                @{ if (array == null)
+                                    {
+                                        <option>无</option>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in array)
+                                        {
+                                            <option value="@item.siteName">@item.siteName</option>
+                                        }
+                                    }
+
+                                }
+                            </select>
+                            <input id="siteId" name="siteId" type="text" value="" placeholder="请输入站点号">
+                            <input class="k-btn" type="submit" value="查询">
+                        </span>
+                    </span>
+                </span>
+            </form>
+        </div>
+
+    </div>
+    <!--主表-->
+    <div class="k-body Export" id="print">
+        <form action="~/SiteManagement/SiteUpdate" method="get" autocomplete="off">
+        <table class="k-grid table-striped footable-res footable metro-blue footable-loaded" style="display: table;">
+            <thead>
+                <tr class="header">
+                    <th scope="col" data-sort-ignore="true">
+                        <input type="checkbox" onclick="checkAll(this)" id="checkAll">
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点编号</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点名称</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点型号</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点分组</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">安装位置</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点状态</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">开关状态</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">IP</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">连接时间</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in allInfo)
+                {
+                    <tr class="alt">
+                        <td>
+                            <input type="checkbox" class="checkEq" value=@item.siteId>
+                            <input type="text" id="siteAcctime" name="siteAcctime" value="@item.siteAcctime" style="width:90px" hidden="hidden" />
+                            <input type="text" id="siteLife" name="siteLife" value="@item.siteLife" style="width:90px" hidden="hidden" />
+                            <input type="text" id="siteNote" name="siteNote" value="@item.siteNote" style="width:90px" hidden="hidden" />
+                            <input type="text" id="sitePurtime" name="sitePurtime" value="@item.sitePurtime" style="width:90px" hidden="hidden" />
+                        </td>
+                        <td>
+                            <div class="line-">
+                                @item.siteId
+                                <input type="text" id="siteId" name="siteId" value="@item.siteId" style="width:90px" hidden="hidden"/>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line- query-eq-info">
+                                <input type="text" id="siteName" name="siteName" value="@item.siteName" style="width:90px" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line-">
+                                <input type="text" id="siteModel" name="siteModel" value="@item.siteModel" style="width:90px" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line-">
+                                <input type="text" id="siteGroup" name="siteGroup" value="@item.siteGroup" style="width:90px" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line-">
+                                <input type="text" id="siteInssite" name="siteInssite" value="@item.siteInssite" style="width:90px" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line-">
+                                <input type="text" id="siteStatus" name="siteStatus" value="@item.siteStatus" style="width:90px" hidden="hidden"/>
+                                @if (@item.siteStatus == 0)
+                                {
+                                    <span>正常</span>
+                                }
+                                else if (@item.siteStatus == 1)
+                                {
+                                    <span>离线</span>
+                                }
+                                else if (@item.siteStatus == 2)
+                                {
+                                    <span>异常</span>
+                                }
+                                else if (@item.siteStatus == 3)
+                                {
+                                    <span>警告</span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line-">
+                                <input type="text" id="siteSwistatus" name="siteSwistatus" value="@item.siteSwistatus" style="width:90px" hidden="hidden"/>
+                                @if (@item.siteSwistatus == 0)
+                                {
+                                    <span>关</span>
+                                }
+                                else if (@item.siteSwistatus == 1)
+                                {
+                                    <span>开</span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line-">
+                                <span class="line-False" style="font-size: 12px">
+                                    @item.siteIp
+                                    <input type="text" id="siteIp" name="siteIp" value="@item.siteIp" style="width:90px" hidden="hidden"/>
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="line-">
+                                @item.siteContime
+                                <input type="text" id="siteContime" name="siteContime" value="@item.siteContime" style="width:90px" hidden="hidden"/>
+                            </div>
+                        </td>
+                        <td class="none_d">
+                                <div style="text-align: center">
+                                    <input class="k-btn" type="submit" value="提交">
+                                </div>
+                            </td>
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
+            </form>
+        </div>
+

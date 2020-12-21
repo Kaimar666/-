@@ -1,0 +1,490 @@
+﻿@using LampNet.Models
+@using System.Collections
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+
+@{
+    ArrayList Ammeter = ViewBag.ammeter as ArrayList;
+    ArrayList Site = ViewBag.site as ArrayList;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>灯联网数据可视化</title>
+    <link rel="stylesheet" href="../Content/reset.css" type="text/css">
+    <link rel="stylesheet" href="../Content/datav.css" type="text/css">
+    <script src="../Content/highcharts/highcharts.js"></script>
+    <script src="../Content/highcharts/exporting.js"></script>
+    <script src="../Content/highcharts/oldie.js"></script>
+    <script src="../Content/highcharts/highcharts-zh_CN.js"></script>
+</head>
+<body>
+    <div class="datav_title">
+        <p>灯联网数据可视化</p>
+        <div class="title_time" onload="showtime">
+            <span id="current-time"></span>
+            <script>
+                function showtime() {
+                    var today, hour, second, minute, year, month, date;
+                    var strDate;
+                    today = new Date();
+                    var n_day = today.getDay();
+                    switch (n_day) {
+
+                        case 0: {
+
+                            strDate = "星期日"
+
+                        } break;
+
+                        case 1: {
+
+                            strDate = "星期一"
+
+                        } break;
+
+                        case 2: {
+
+                            strDate = "星期二"
+
+                        } break;
+
+                        case 3: {
+
+                            strDate = "星期三"
+
+                        } break;
+
+                        case 4: {
+
+                            strDate = "星期四"
+
+                        } break;
+
+                        case 5: {
+
+                            strDate = "星期五"
+
+                        } break;
+
+                        case 6: {
+
+                            strDate = "星期六"
+
+                        } break;
+
+                        case 7: {
+
+                            strDate = "星期日"
+
+                        } break;
+
+                    }
+                    year = today.getFullYear();
+                    month = today.getMonth() + 1;
+                    date = today.getDate();
+                    hour = today.getHours();
+                    minute = today.getMinutes();
+                    second = today.getSeconds();
+                    if (month >= 1 && month <= 9) {
+
+                        month = "0" + month;
+
+                    }
+                    if (date >= 0 && date <= 9) {
+
+                        date = "0" + date;
+
+                    }
+                    if (hour >= 0 && hour <= 9) {
+
+                        hour = "0" + hour;
+
+                    }
+                    if (minute >= 0 && minute <= 9) {
+
+                        minute = "0" + minute;
+
+                    }
+                    if (second >= 0 && second <= 9) {
+
+                        second = "0" + second;
+
+                    }
+                    document.getElementById('current-time').innerHTML = "当前时间：" + year + "年" + month + "月" + date + "日" + "  " + strDate + "   " + hour + ":" + minute + ":" + second; //显示时间
+                    setTimeout("showtime();", 10); //设定函数自动执行时间为 1000 ms(1 s)
+                }
+            </script>
+        </div>
+    </div>
+    <div class="datav_visual_box">
+        <!-- 左侧 -->
+        <div class="datav_left">
+            <div class="equipment_box rect ">
+                <h6>设备状态</h6>
+                <p>配电箱数量 <span>@ViewBag.sitecount 台</span></p>
+                <ul>
+                    <li>
+                        <p>在线数量</p>
+                        <span>@ViewBag.siteOnline 台</span>
+                    </li>
+                    <li>
+                        <p>工作数量</p>
+                        <span>@ViewBag.siteOn 台</span>
+                    </li>
+                    <li>
+                        <p>告警数量</p>
+                        <span>@ViewBag.siteAlarm 台</span>
+                    </li>
+                </ul>
+                <div>
+                    <div id="mountNode">
+                        <div style="position:relative;"><canvas id="canvas_1" style="width: 184px; height: 118px; cursor: default;" width="276" height="177"></canvas><div class="g-guide" style="position: absolute; top: 46px; left: 16px; visibility: visible; z-index: 7;"><div class="g2-guide-html" style="color:#19fdf6"><p class="value">10%</p><p class="title">在线率</p></div></div><div class="g-guide" style="position: absolute; top: 46px; left: 74px; visibility: visible; z-index: 7;"><div class="g2-guide-html" style="color:#31ffba"><p class="value">0%</p><p class="title">工作率</p></div></div><div class="g-guide" style="position: absolute; top: 46px; left: 132px; visibility: visible; z-index: 7;"><div class="g2-guide-html" style="color:#ff8141"><p class="value">10%</p><p class="title">告警率</p></div></div><div class="g2-tooltip" style="position: absolute; visibility: hidden; z-index: 8; transition: visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(255, 255, 255, 0.9); box-shadow: rgb(174, 174, 174) 0px 0px 10px; border-radius: 3px; color: rgb(87, 87, 87); font-size: 12px; font-family: &quot;-apple-system&quot;, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, SimSun, &quot;sans-serif&quot;; line-height: 20px; padding: 10px 10px 6px;"> <div class="g2-tooltip-title"></div><ul class="g2-tooltip-list"></ul></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_lamp_box rect ">
+                <h6>单灯状态</h6>
+                <p>单灯数量 <span>@ViewBag.ammetercount 盏</span></p>
+                <ul>
+                    <li>
+                        <p>在线数量</p>
+                        <span>@ViewBag.ammeterOnline 盏</span>
+                    </li>
+                    <li>
+                        <p>开灯数量</p>
+                        <span>@ViewBag.ammeterOn 盏</span>
+                    </li>
+                    <li>
+                        <p>告警数量</p>
+                        <span>@ViewBag.ammeterAlarm 盏</span>
+                    </li>
+                </ul>
+                <div>
+                    <div id="singleLampLoop"><div style="position:relative;"><canvas id="canvas_6" style="width: 184px; height: 118px;" width="276" height="177"></canvas><div class="g-guide" style="position: absolute; top: 46px; left: 16px; visibility: visible; z-index: 7;"><div class="g2-guide-html" style="color:#19fdf6"><p class="value">10%</p><p class="title">在线率</p><i></i></div></div><div class="g-guide" style="position: absolute; top: 46px; left: 74px; visibility: visible; z-index: 7;"><div class="g2-guide-html" style="color:#31ffba"><p class="value">10%</p><p class="title">亮灯率</p><i></i></div></div><div class="g-guide" style="position: absolute; top: 46px; left: 132px; visibility: visible; z-index: 7;"><div class="g2-guide-html" style="color:#ff8141"><p class="value">0%</p><p class="title">告警率</p><i></i></div></div><div class="g2-tooltip" style="position: absolute; visibility: hidden; z-index: 8; transition: visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(255, 255, 255, 0.9); box-shadow: rgb(174, 174, 174) 0px 0px 10px; border-radius: 3px; color: rgb(87, 87, 87); font-size: 12px; font-family: &quot;-apple-system&quot;, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, SimSun, &quot;sans-serif&quot;; line-height: 20px; padding: 10px 10px 6px;"> <div class="g2-tooltip-title"></div><ul class="g2-tooltip-list"></ul></div></div></div>
+                </div>
+            </div>
+            <div class="energy_box rect ">
+                <h6>定时计划</h6>
+                <p>开灯时间： <span>@ViewBag.opentime</span></p>
+                <p>关灯时间： <span>@ViewBag.closetime</span></p>
+                <p>巡检开始时间： <span>@ViewBag.xjstatime</span></p>
+                <p>巡检结束时间： <span>@ViewBag.xjendtime</span></p>
+            </div>
+        </div>
+
+        <!-- 中 -->
+        <div class="datav_center">
+            <div class="map_box rect">
+                <ul class="center_map_menu">
+                    <li class="map_active">能耗图</li>
+                </ul>
+                <div id="MapLigState" class="0 amap-container" style="position: relative; background: rgb(24, 45, 74) none repeat scroll 0% 0%;">
+                    <object style="display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;" type="text/html" data="about:blank"></object>
+                    <div class="amap-maps">
+                        <div class="amap-drags">
+                            <div class="amap-layers" id="container" style="transform: translateZ(0px);width=" 978" style="width: 652px; height: 550px;" height="696" ">
+                            </div>
+                            <script>
+                                var chart = Highcharts.chart('container', {
+                                    chart: {
+                                        type: 'line'
+                                    },
+                                    title: {
+                                        text: '能耗数据曲线图'
+                                    },
+                                    subtitle: {
+                                        text: '数据来源: 灯联网系统-灯网'
+                                    },
+                                    xAxis: {
+                                        categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: '能耗 (KWH千瓦时)'
+                                        }
+                                    },
+                                    plotOptions: {
+                                        line: {
+                                            dataLabels: {
+                                                // 开启数据标签
+                                                enabled: true
+                                            },
+                                            // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+                                            enableMouseTracking: false
+                                        }
+                                    },
+                                    series: [{
+                                        name: '北京站',
+                                        data: [27.0, 26.9, 29.5, 24.5, 28.4, 21.5, 25.2, 26.5, 23.3, 28.3, 23.9, 29.6]
+                                    }, {
+                                        name: '南京站',
+                                        data: [33.9, 34.8, 34.2, 34.2, 36.6, 35.7, 38.5, 31.9, 36.6, 35.2, 37.0, 30.3]
+                                    }, {
+                                        name: '成都站',
+                                        data: [53.5, 54.2, 55.7, 58.5, 51.9, 55.2, 57.0, 56.6, 54.2, 50.3, 56.6, 54.8]
+                                    }, {
+                                        name: '西宁站',
+                                        data: [43.4, 44.2, 45.7, 48.5, 41.9, 45.2, 47.0, 44.2, 40.3, 46.6, 46.6, 44.8]
+                                    }, {
+                                        name: '昆明站',
+                                        data: [53.7, 58.5, 55.7, 51.1, 55.2, 54.3, 57.0, 56.6, 54.2, 54.8, 50.3, 56.6]
+                                    }]
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="energy_time_box">
+                <div class="energy_time_hour rect ">
+                    <h6>告警状态</h6>
+                    <div class="report_state">
+                        <ul>
+                            <li>告警总数：<span>@ViewBag.noticecount</span></li>
+                            <li>待处理告警：<span>0</span></li>
+                            <li>已处理告警：<span>@ViewBag.noticecount</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="energy_time_day rect ">
+                    <h6>告警项目分布</h6>
+                    <div class="report_state">
+                        <ul>
+                            <li>站点告警：
+                            @{
+                                foreach(var site in Site)
+                                {
+                                    <span>@site;</span>
+                                }
+                            }
+                            </li>
+                            <li>电表告警：@{
+                                foreach(var ammeter in Ammeter)
+                                {
+                                    <span>@ammeter;</span>
+                                }
+                            }</li>
+                            <li>生命告警：<span>无</span></li>
+                            <li>超负荷：<span>无</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="energy_time_month rect">
+                    <h6>最新告警</h6>
+                    <div class="report_new" style="height: 106.667px;">
+                        <ul class="report_new_ul">
+                            <li>暂无告警内容</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- 右 -->
+        <div class="datav_right">
+            <div class="energy_data_box rect">
+                <h6>能耗数据</h6>
+                <ul class="energy_data">
+                    <li>
+                        <p>本月能耗</p><p>@ViewBag.curenergy KWH</p>
+                        @{ string i = Convert.ToDouble(100 * ViewBag.curenergy / 520000).ToString("0.00");}
+                        <div>
+                            <div class="energy_text">
+                                <p>节能率</p>
+                                <p>额定能耗<span>520000KWH</span></p>
+                            </div>
+                            <span class="expand htmlthisMonth" style="width: @i%;">
+
+                            </span>
+                            <i></i>
+                        </div>
+                        <strong>@i%</strong>
+                    </li>
+                    <li>
+                        <p>上月能耗</p><p>@ViewBag.preenergy KWH</p>
+                        @{ string j = Convert.ToDouble(100*ViewBag.preenergy / 520000).ToString("0.00");}
+                        <div>
+                            <div class="energy_text">
+                                <p>节能率</p>
+                                <p>额定能耗<span>520000KWH</span></p>
+                            </div>
+                            <span class="expand htmllastMonth" style="width: @j%;">
+
+                            </span>
+                            <i></i>
+                        </div>
+                        <strong>@j%</strong>
+                    </li>
+                    <li>
+                        <p>累计能耗</p><p>620460.85KWH</p>
+                        @{ string k = Convert.ToDouble(ViewBag.totalpower / 620460.85).ToString("0.00");}
+                        <div>
+                            <div class="energy_text">
+                                <p>节能率</p>
+                                <p>额定能耗<span>@ViewBag.totalpower KWH</span></p>
+                            </div>
+                            <span class="expand htmltotal" style="width: @k%;">
+
+                            </span>
+                            <i></i>
+                        </div>
+                        <strong>@k%</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="energy_minute_box rect">
+                <h6>本月能耗数据统计</h6>
+                <div>
+                    <div id="timeShareChart">
+                        <div class="report_state">
+                            <div id="container1" style="min-width:303.5px;height:195.5px"></div>
+                            <script>
+                                Highcharts.chart('container1', {
+                                    chart: {
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false,
+                                        type: 'pie'
+                                    },
+                                    title: {
+                                        text: '本月站点能耗分布图'
+                                    },
+                                    tooltip: {
+                                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                    },
+                                    plotOptions: {
+                                        pie: {
+                                            allowPointSelect: true,
+                                            cursor: 'pointer',
+                                            dataLabels: {
+                                                enabled: true,
+                                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                style: {
+                                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                }
+                                            }
+                                        }
+                                    },
+                                    series: [{
+                                        name: 'Brands',
+                                        colorByPoint: true,
+                                        data: [{
+                                            name: '北京站',
+                                            y: 20.41,
+                                        }, {
+                                            name: '南京站',
+                                            y: 15.84
+                                        }, {
+                                            name: '兴华站',
+                                            y: 15.35
+                                        }, {
+                                            name: '成都站',
+                                            y: 14.67
+                                        }, {
+                                            name: '重庆站',
+                                            y: 10.18
+                                        }, {
+                                            name: '拉萨站',
+                                            y: 4.64
+                                        }, {
+                                            name: '昆明站',
+                                            y: 6.6
+                                        }, {
+                                            name: '广州站',
+                                            y: 17.2
+                                        }, {
+                                            name: '其它',
+                                            y: 2.61
+                                        }]
+                                    }]
+                                });</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="energy_day_box rect">
+                <h6>上月能耗数据统计</h6>
+                <div>
+                    <div id="dayChart">
+                        <div style="position:relative;">
+                            <div class="report_state">
+                                <div id="container2" style="min-width:303.5px;height:195.5px"></div>
+                                <script>
+                                    Highcharts.chart('container2', {
+                                        chart: {
+                                            plotBackgroundColor: null,
+                                            plotBorderWidth: null,
+                                            plotShadow: false,
+                                            type: 'pie'
+                                        },
+                                        title: {
+                                            text: '本月站点能耗分布图'
+                                        },
+                                        tooltip: {
+                                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                        },
+                                        plotOptions: {
+                                            pie: {
+                                                allowPointSelect: true,
+                                                cursor: 'pointer',
+                                                dataLabels: {
+                                                    enabled: true,
+                                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                    style: {
+                                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        series: [{
+                                            name: 'Brands',
+                                            colorByPoint: true,
+                                            data: [{
+                                                name: '北京站',
+                                                y: 18.12
+                                            }, {
+                                                name: '南京站',
+                                                y: 16.11
+                                            }, {
+                                                name: '兴华站',
+                                                y: 14.53
+                                            }, {
+                                                name: '成都站',
+                                                y: 13.88
+                                            }, {
+                                                name: '重庆站',
+                                                y: 11.44
+                                            }, {
+                                                name: '拉萨站',
+                                                y: 4.12
+                                            }, {
+                                                name: '昆明站',
+                                                y: 6.8
+                                            }, {
+                                                name: '广州站',
+                                                y: 17.9
+                                            }, {
+                                                name: '其它',
+                                                y: 2.61
+                                            }]
+                                        }]
+                                    });</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

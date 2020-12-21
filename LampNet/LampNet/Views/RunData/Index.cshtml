@@ -1,0 +1,240 @@
+﻿@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@{
+    Layout = "~/Views/Shared/DataCenter_Layout.cshtml";
+    ViewBag.Title = "RunData";
+}
+@{
+    TBL_SITE[] siteInfo = ViewBag.siteInfo as TBL_SITE[];
+    TBL_RUN[] runInfo = ViewBag.runInfo as TBL_RUN[];
+    int nowPage = ViewBag.nowPage;
+    int sumPage = ViewBag.sumPage;
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user">
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head" href="~/EnergyData/Index">能耗数据 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head " href="~/ProtectDataUser/Index">运维数据 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="~/RunData/Index">运行数据 <i class="block"></i></a>
+        </li>
+    </ul>
+</nav>
+
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+    <!--搜索栏-->
+    <div class="page-toolbar">
+        
+            <div class="k-search">
+                
+                    <form action="~/RunData/RunDataSelect" method="post" autocomplete="off">
+                        
+                        <div class="screen_box">
+                            <span class="query">
+                            <span style="float: left">
+                                <span>时间：</span>
+                                <input id="runFreshtime" name="runFreshtime" type="text" value="" placeholder="格式：2020-01-01">
+                                <span>站点：</span>
+                                <select class="grouping" name="siteName">
+                                    @{ 
+                                        foreach(var item in siteInfo)
+                                        {
+                                            <option value=@item.siteName>@item.siteName</option>
+                                        }
+                                    }
+                                    
+                                </select>
+                                <span>站点号：</span>
+                                <input id="siteId" name="siteId" type="text" value="" placeholder="请输入站点号">
+                                <input class="k-btn" type="submit" value="查询">
+                            </span>
+                            </span>
+                        </div>
+                    </form>
+                
+            </div>
+    </div>
+    <!--表格内容-->
+    <div class="k-body">
+        <div class="k-body Export" id="print">
+            <table class="k-grid table-striped footable-res footable metro-blue footable-loaded" style="display: table;">
+                <thead>
+                    <tr class="header">
+                        <th scope="col" class="footable-sortable">
+                            <a href="">站点名称</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">站点分组</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">状态</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">电压(V)</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">电流(A)</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">输出状态</a>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">反馈状态</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">亮灯率</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">更新时间</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                    </tr>
+                    @{
+                        int i = 0;
+                        foreach (var item in runInfo)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span>
+                                                @siteInfo[i].siteName
+                                            </span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span>
+                                                @siteInfo[i].siteGroup
+                                            </span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span>
+                                                @siteInfo[i].siteStatus
+                                            </span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span>@item.runVolt</span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span>@item.runCurrent</span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span class="status0">
+                                                <span class="status-text">
+                                                    @{
+                                                        if(@siteInfo[i].siteSwistatus == 0)
+                                                        {
+                                                            <span>关</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="status1">开</span>
+                                                        }
+                                                    }
+
+                                                </span>
+                                            </span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span class="status0">
+                                                <span class="status-text">
+                                                    @{
+                                                        if(@siteInfo[i].siteSwistatus == 0)
+                                                        {
+                                                            <span>关</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="status1">开</span>
+                                                        }
+                                                    }
+                                                </span>
+                                            </span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span>@item.runStavalue</span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            <span>@item.runFreshtime</span>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!--页面翻页-->
+    <div class="pager" style="text-align:right">
+            <span class="pageInfo">第@{@nowPage} / @{@sumPage}页，共@{@runInfo.Count()}条记录</span>
+            <span class="disabled">上一页</span>
+            <span class="current">@{@nowPage}</span>
+            <span class="disabled">下一页</span>&nbsp;<span class="jumpPage">跳转到第 <input title="回车跳转到指定页面" type="text" value="1" style="width:20px;text-align: center;"> 页</span>
+            <span class="pageSize">页面大小 <input id="size" title="回车指定页面大小" type="text" value="15" style="width: 30px; text-align: center;"> </span>
+    </div>
+</div>

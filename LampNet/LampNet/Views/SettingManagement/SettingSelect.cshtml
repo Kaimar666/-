@@ -1,0 +1,273 @@
+﻿
+@using LampNet.Models
+@using System.Collections
+@model LampNet.Models.TBL_SYSSET
+@{
+    Layout = "~/Views/Shared/ManagementCenter_Layout.cshtml";
+    ViewBag.Title = "SettingSelect";
+}
+@{
+    TBL_SYSSET[] allInfo = ViewBag.allInfo as TBL_SYSSET[];
+    TBL_SYSSET[] info = ViewBag.info as TBL_SYSSET[];
+}
+
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user" />
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head" href="../SiteManagement/Index">站点管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../AmmeterManagement/Index">电表管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../UserManagement/Index">用户管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../LifeManagement/Index">生命周期 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="../SettingManagement/Index">系统设置 <i class="block"></i></a>
+        </li>
+    </ul>
+</nav>
+<!--Content-->
+
+<div>
+    <style>
+        .page-spliter {
+            background: #9BAFBF !important;
+            margin: 0;
+            padding: 5px 10px;
+            color: #fff;
+        }
+
+        .layout td {
+            border: 1px solid #ccc !important;
+            padding: 0px 5px;
+        }
+    </style>
+    <div class="k-body Export" id="print">
+        <form action="~/SettingManagement/SettingSelect" method="post" autocomplete="off">
+            <div class="page-spliter">
+                方案
+            </div>
+            <table class="layout">
+                <tbody>
+                    <tr>
+                        <td class="klabel">
+                            方案：
+                        </td>
+                        <td>
+                            <select name="syssetId">
+                                @{
+                                    foreach (var item in allInfo)
+                                    {
+                                        if(info[0].syssetId == item.syssetId)
+                                        {
+                                            <option selected ="selected" value="@item.syssetId">@item.syssetName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.syssetId">@item.syssetName</option>
+                                        }
+                                        
+                                    }
+                                }
+                            </select>
+                            <input type="submit" class="k-btn" value="查询">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <form action="~/SettingManagement/SettingUpdate" method="post" autocomplete="off">
+            @{
+                foreach (var item in info)
+                {
+                    <input id="syssetId" name="syssetId" type="text" value=@item.syssetId hidden = "hidden">
+                    <input id="syssetName" name="syssetName" type="text" value=@item.syssetName hidden="hidden">
+                    <div class="page-spliter">
+                        照度下发阈值，与设备光控阀值保持一致
+                    </div>
+                    <table class="layout">
+                        <tbody>
+                            <tr>
+                                <td class="klabel">
+                                    <label>关灯：</label>
+                                </td>
+                                <td>
+                                    <input id="syssetClovalue" name="syssetClovalue" type="text" value=@item.syssetClovalue> Lux
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="klabel">
+                                    <label>开灯：</label>
+                                </td>
+                                <td>
+                                    <input id="syssetOpevalue" name="syssetOpevalue" type="text" value=@item.syssetOpevalue> Lux
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="page-spliter">
+                        报警时效
+                    </div>
+                    <table class="layout">
+                        <tbody>
+                            <tr>
+                                <td class="klabel">
+                                    <label>时间：</label>
+                                </td>
+                                <td>
+                                    <select id="syssetAlatime" name="syssetAlatime">
+                                    @{ 
+                                        if(item.syssetAlatime == -1)
+                                        {
+                                            <option selected="selected" value="-1">从不</option>
+                                            <option value="0">即时</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="8">8</option>
+                                            <option value="12">12</option>
+                                            <option value="24">24</option>
+                                        }
+                                        else if(item.syssetAlatime == 0)
+                                        {
+                                            <option value="-1">从不</option>
+                                            <option selected="selected" value="0">即时</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="8">8</option>
+                                            <option value="12">12</option>
+                                            <option value="24">24</option>
+                                        }
+                                        else if(item.syssetAlatime == 1)
+                                        {
+                                            <option value="-1">从不</option>
+                                            <option value="0">即时</option>
+                                            <option selected="selected" value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="8">8</option>
+                                            <option value="12">12</option>
+                                            <option value="24">24</option>
+                                        }
+                                        else if(item.syssetAlatime == 2)
+                                        {
+                                            <option value="-1">从不</option>
+                                            <option value="0">即时</option>
+                                            <option value="1">1</option>
+                                            <option selected="selected" value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="8">8</option>
+                                            <option value="12">12</option>
+                                            <option value="24">24</option>
+                                        }
+                                        else if(item.syssetAlatime == 4)
+                                        {
+                                            <option value="-1">从不</option>
+                                            <option value="0">即时</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option selected="selected" value="4">4</option>
+                                            <option value="8">8</option>
+                                            <option value="12">12</option>
+                                            <option value="24">24</option>
+                                        }
+                                        else if(item.syssetAlatime == 8)
+                                        {
+                                            <option value="-1">从不</option>
+                                            <option value="0">即时</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option selected="selected" value="8">8</option>
+                                            <option value="12">12</option>
+                                            <option value="24">24</option>
+                                        }
+                                        else if(item.syssetAlatime == 12)
+                                        {
+                                            <option value="-1">从不</option>
+                                            <option value="0">即时</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="8">8</option>
+                                            <option selected="selected" value="12">12</option>
+                                            <option value="24">24</option>
+                                        }
+                                        else if(item.syssetAlatime == 24)
+                                        {
+                                            <option value="-1">从不</option>
+                                            <option value="0">即时</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="8">8</option>
+                                            <option value="12">12</option>
+                                            <option selected="selected" value="24">24</option>
+                                        }
+                                    } 
+                                    </select> 小时后，自动处理
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="page-spliter">
+                        单灯报警
+                    </div>
+                    <table class="layout">
+                        <tbody>
+                            <tr>
+                                <td class="klabel">
+                                    <label>电流：</label>
+                                </td>
+                                <td>
+                                    <input id="syssetAlacurrent" name="syssetAlacurrent" type="text" value=@item.syssetAlacurrent>A 电流大于0小于设定值时地图显示报警
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="page-spliter">
+                        备注
+                    </div>
+                    <table class="layout">
+                        <tbody>
+                            <tr>
+                                <td class="klabel">
+                                    <label>备注：</label>
+                                </td>
+                                <td>
+                                    <input id="syssetNote" name="syssetNote" type="text" value=@item.syssetNote>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="page-button">
+                        <input type="submit" class="k-btn" value="设置">
+                    </div>
+                }
+            }
+        </form>
+    </div>
+
+</div>
+

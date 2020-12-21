@@ -1,0 +1,56 @@
+.ctrl3
+{
+    width: 90px;
+}
+#hdtbl-1
+{
+    z-index: 9;
+}
+table.k-tmp
+{
+    background-color: White;
+    margin: 0;
+    border-collapse: collapse;
+    font-weight: normal;
+    border: 0;
+}
+table.k-tmp tr
+{
+    border: 0;
+    line-height: 18px;
+}
+table.k-tmp tbody tr:hover
+{
+    background-color: transparent;
+    color: Black;
+    background: none;
+}
+table.k-tmp, table.k-tmp td
+{
+    border: 0;
+    padding: 2px;
+    font-weight: normal;
+}
+table.k-tmp td.k-tmp
+{
+    text-align: right;
+    font-weight: normal;
+}
+table.k-grid thead tr table.k-tmp tr
+{
+    border: 0;
+}
+td.oprtd:hover
+{
+    background-color: White;
+    color: Black;
+}
+div.khltable
+{
+    display: inline-block;
+    min-width: 50px;
+}
+table.k-grid td.oprtd
+{
+    text-align: left;
+}

@@ -1,0 +1,180 @@
+﻿@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@{
+    Layout = "~/Views/Shared/ControlCenter_Layout.cshtml";
+    ViewBag.Title = "CenterSettingTime";
+}
+@{
+    TBL_SITE[] sitearray = ViewBag.sitearray as TBL_SITE[];
+    TBL_CTRCONTROL[] ctrarray = ViewBag.ctrarray as TBL_CTRCONTROL[];
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user">
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head " href="~/CenterControl/CenterControl">集中控制 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="~/CenterControl/CenterSettingTime">集中设置 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/SingleControl/SingleControl">单灯控制 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/SingleControl/SingleSettingTime">单灯设置 <i></i></a>
+        </li>
+    </ul>
+    <div class="shade">
+        <ul class="offset_left">
+            <li>
+                <a class="menuTopLists shade_active" href="~/CenterControl/CenterSettingTime">时钟设置</a>
+            </li>
+            <li>
+                <a class="menuTopLists" href="~/CenterControl/CenterSettingLight">光控设置</a>
+            </li>
+            <li>
+                <a class="menuTopLists" href="~/CenterControl/CenterSettingSetTime">定时设置</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--Content-->
+<div class="k-body" style="min-height:100%">
+    <form action="~/CenterControl/CenterSettingTimeUpdate" method="post" autocomplete="off">
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top" id="ctrlTdB">
+                        <div style=" background-color: #c0c0c0">
+                            <!--协议分组-->
+                            <div class="k-tabs">
+                                <ul>
+                                    <li class="k-tab "><a href="">时钟设置</a></li>
+                                </ul>
+                            </div>
+                            <div id="setarea" style="padding: 10px">
+                                <!--协议本体-->
+                                <table style="width: 100%">
+                                    <tbody>
+                                        <tr>
+                                            <td class="kctrl-label">时间：</td>
+                                            @{ 
+                                                DateTime dt = DateTime.Now;
+                                            }
+                                            <td>
+                                                <input type="text" class="k-hour" style="width:50px" name="year" value=@dt.Year>年<input type="text" class="k-min" name="month" value=@dt.Month>月<input type="text" class="k-sec" name="day" value=@dt.Day>日
+                                            </td>
+                                            <td>
+                                                <input type="text" class="k-hour" name="hour" value=@dt.Hour>:<input type="text" class="k-min" name="minute" value=@dt.Minute>:<input type="text" class="k-sec" name="second" value=@dt.Second> H/M/S
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kctrl-label">星期：</td>
+                                            <td>
+                                                <select name="week">
+                                                    @if(dt.DayOfWeek.ToString() == "Monday")
+                                                    {
+                                                        <option value="1" selected="selected">星期一</option>
+                                                        <option value="2">星期二</option>
+                                                        <option value="3">星期三</option>
+                                                        <option value="4">星期四</option>
+                                                        <option value="5">星期五</option>
+                                                        <option value="6">星期六</option>
+                                                        <option value="7">星期日</option>
+                                                    }
+                                                    @if(dt.DayOfWeek.ToString() == "Tuesday")
+                                                    {
+                                                        <option value="1">星期一</option>
+                                                        <option value="2" selected="selected">星期二</option>
+                                                        <option value="3">星期三</option>
+                                                        <option value="4">星期四</option>
+                                                        <option value="5">星期五</option>
+                                                        <option value="6">星期六</option>
+                                                        <option value="7">星期日</option>
+                                                    }
+                                                    @if(dt.DayOfWeek.ToString() == "Wednesday")
+                                                    {
+                                                        <option value="1">星期一</option>
+                                                        <option value="2">星期二</option>
+                                                        <option value="3" selected="selected">星期三</option>
+                                                        <option value="4">星期四</option>
+                                                        <option value="5">星期五</option>
+                                                        <option value="6">星期六</option>
+                                                        <option value="7">星期日</option>
+                                                    }
+                                                    @if(dt.DayOfWeek.ToString() == "Thursday")
+                                                    {
+                                                        <option value="1">星期一</option>
+                                                        <option value="2">星期二</option>
+                                                        <option value="3">星期三</option>
+                                                        <option value="4" selected="selected">星期四</option>
+                                                        <option value="5">星期五</option>
+                                                        <option value="6">星期六</option>
+                                                        <option value="7">星期日</option>
+                                                    }
+                                                    @if(dt.DayOfWeek.ToString() == "Friday")
+                                                    {
+                                                        <option value="1">星期一</option>
+                                                        <option value="2">星期二</option>
+                                                        <option value="3">星期三</option>
+                                                        <option value="4">星期四</option>
+                                                        <option value="5" selected="selected">星期五</option>
+                                                        <option value="6">星期六</option>
+                                                        <option value="7">星期日</option>
+                                                    }
+                                                    @if(dt.DayOfWeek.ToString() == "Saturday")
+                                                    {
+                                                        <option value="1">星期一</option>
+                                                        <option value="2">星期二</option>
+                                                        <option value="3">星期三</option>
+                                                        <option value="4">星期四</option>
+                                                        <option value="5">星期五</option>
+                                                        <option value="6" selected="selected">星期六</option>
+                                                        <option value="7">星期日</option>
+                                                    }
+                                                    @if(dt.DayOfWeek.ToString() == "Sunday")
+                                                    {
+                                                        <option value="1">星期一</option>
+                                                        <option value="2">星期二</option>
+                                                        <option value="3">星期三</option>
+                                                        <option value="4">星期四</option>
+                                                        <option value="5">星期五</option>
+                                                        <option value="6">星期六</option>
+                                                        <option value="7" selected="selected">星期日</option>
+                                                    }
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div style="margin-top: 15px">
+                                    <input type="submit" id="btnSendProto" name="oprType" class="k-btn" value="执行">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+

@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LampNetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TBL_AMMETER">
+    <Key>
+      <PropertyRef Name="ammeterId" />
+    </Key>
+    <Property Name="siteId" Type="int" />
+    <Property Name="ammeterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ammeterName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ammeterGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="ammeterModel" Type="nvarchar" MaxLength="50" />
+    <Property Name="ammeterRefpower" Type="float" />
+    <Property Name="ammeterOldload" Type="float" />
+    <Property Name="ammeterNewload" Type="float" />
+    <Property Name="ammeterRate" Type="float" />
+    <Property Name="ammeterAlarm" Type="float" />
+    <Property Name="ammeterStatus" Type="int" />
+    <Property Name="ammeterSwistatus" Type="int" />
+    <Property Name="ammeterLife" Type="float" />
+    <Property Name="ammeterAcctime" Type="datetime" />
+    <Property Name="ammeterNote" Type="text" />
+  </EntityType>
+  <EntityType Name="TBL_CTRCONTROL">
+    <Key>
+      <PropertyRef Name="siteId" />
+    </Key>
+    <Property Name="siteId" Type="int" Nullable="false" />
+    <Property Name="ctrcontrolTimweek" Type="int" />
+    <Property Name="ctrcontrolLigweek" Type="int" />
+    <Property Name="ctrcontrolTimopetime" Type="time" Precision="7" />
+    <Property Name="ctrcontrolTimclotime" Type="time" Precision="7" />
+    <Property Name="ctrcontrolOpeligvalue" Type="float" />
+    <Property Name="ctrcontrolCloligvalue" Type="float" />
+    <Property Name="ctrcontrolLigvalsource" Type="int" />
+    <Property Name="ctrcontrolSystime" Type="datetime" />
+    <Property Name="ctrcontrolSysweek" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_DEVICEPROTECT">
+    <Key>
+      <PropertyRef Name="infoId" />
+    </Key>
+    <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="int" />
+    <Property Name="siteId" Type="int" />
+    <Property Name="ammeterId" Type="int" />
+    <Property Name="deviceprotectKind" Type="int" />
+    <Property Name="deviceprotectModule" Type="int" />
+    <Property Name="deviceprotectLoginfo" Type="nvarchar" MaxLength="100" />
+    <Property Name="deviceprotectOpttime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TBL_DOCUMENT">
+    <Key>
+      <PropertyRef Name="documentId" />
+    </Key>
+    <Property Name="documentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="documentKind" Type="int" />
+    <Property Name="documentNote" Type="text" />
+    <Property Name="documentTime" Type="datetime" />
+    <Property Name="documentUrl" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TBL_ENERGY">
+    <Key>
+      <PropertyRef Name="siteId" />
+    </Key>
+    <Property Name="siteId" Type="int" Nullable="false" />
+    <Property Name="energyDate" Type="date" />
+    <Property Name="energyWorktime" Type="float" />
+    <Property Name="energyStavalue" Type="float" />
+    <Property Name="energyEndvalue" Type="float" />
+    <Property Name="energyPrepower" Type="float" />
+    <Property Name="energyCurpower" Type="float" />
+    <Property Name="energyPrerate" Type="float" />
+    <Property Name="energyCurrate" Type="float" />
+  </EntityType>
+  <EntityType Name="TBL_FEEDBACK">
+    <Key>
+      <PropertyRef Name="infoId" />
+    </Key>
+    <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="int" />
+    <Property Name="feedbackTime" Type="datetime" />
+    <Property Name="feedbackNote" Type="text" />
+  </EntityType>
+  <EntityType Name="TBL_RUN">
+    <Key>
+      <PropertyRef Name="siteId" />
+    </Key>
+    <Property Name="siteId" Type="int" Nullable="false" />
+    <Property Name="runVolt" Type="float" />
+    <Property Name="runCurrent" Type="float" />
+    <Property Name="runStavalue" Type="float" />
+    <Property Name="runFreshtime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TBL_RUNNOTE">
+    <Key>
+      <PropertyRef Name="infoId" />
+    </Key>
+    <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="siteId" Type="int" />
+    <Property Name="ammeterId" Type="int" />
+    <Property Name="runnoteAlastatus" Type="int" />
+    <Property Name="runnoteAlatime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TBL_SIGCONTROL">
+    <Key>
+      <PropertyRef Name="ammeterId" />
+    </Key>
+    <Property Name="ammeterId" Type="int" Nullable="false" />
+    <Property Name="ammeterSwistatus" Type="int" />
+    <Property Name="sigcontrolIndtime" Type="float" />
+    <Property Name="sigcontrolInsstatime" Type="time" Precision="7" />
+    <Property Name="sigcontrolInsendtime" Type="time" Precision="7" />
+    <Property Name="sigcontrolAlacurup" Type="float" />
+    <Property Name="sigcontrolAlacurlow" Type="float" />
+  </EntityType>
+  <EntityType Name="TBL_SITE">
+    <Key>
+      <PropertyRef Name="siteId" />
+    </Key>
+    <Property Name="siteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="siteName" Type="nvarchar" MaxLength="50" />
+    <Property Name="siteGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="siteModel" Type="nvarchar" MaxLength="50" />
+    <Property Name="siteStatus" Type="int" />
+    <Property Name="siteSwistatus" Type="int" />
+    <Property Name="siteIp" Type="nvarchar" MaxLength="100" />
+    <Property Name="siteContime" Type="datetime" />
+    <Property Name="siteInssite" Type="nvarchar" MaxLength="200" />
+    <Property Name="sitePurtime" Type="date" />
+    <Property Name="siteLife" Type="float" />
+    <Property Name="siteAcctime" Type="datetime" />
+    <Property Name="siteNote" Type="text" />
+  </EntityType>
+  <EntityType Name="TBL_SYSSET">
+    <Key>
+      <PropertyRef Name="syssetId" />
+    </Key>
+    <Property Name="syssetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="syssetName" Type="nvarchar" MaxLength="50" />
+    <Property Name="syssetOpevalue" Type="float" />
+    <Property Name="syssetClovalue" Type="float" />
+    <Property Name="syssetAlatime" Type="float" />
+    <Property Name="syssetAlacurrent" Type="float" />
+    <Property Name="syssetNote" Type="text" />
+  </EntityType>
+  <EntityType Name="TBL_USER">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" />
+    <Property Name="userSex" Type="int" />
+    <Property Name="userPwd" Type="nvarchar" MaxLength="100" />
+    <Property Name="userPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="userWechat" Type="nvarchar" MaxLength="50" />
+    <Property Name="userStatus" Type="int" />
+    <Property Name="userLlogtime" Type="datetime" />
+    <Property Name="userExptime" Type="datetime" />
+    <Property Name="userAut" Type="int" />
+    <Property Name="userNote" Type="text" />
+  </EntityType>
+  <EntityType Name="TBL_USERPROTECT">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="userprotectKind" Type="int" />
+    <Property Name="userprotectModule" Type="int" />
+    <Property Name="userprotectLoginfo" Type="nvarchar" MaxLength="100" />
+    <Property Name="userprotectOpttime" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="LampNetModelStoreContainer">
+    <EntitySet Name="TBL_AMMETER" EntityType="Self.TBL_AMMETER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_CTRCONTROL" EntityType="Self.TBL_CTRCONTROL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_DEVICEPROTECT" EntityType="Self.TBL_DEVICEPROTECT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_DOCUMENT" EntityType="Self.TBL_DOCUMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ENERGY" EntityType="Self.TBL_ENERGY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_FEEDBACK" EntityType="Self.TBL_FEEDBACK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_RUN" EntityType="Self.TBL_RUN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_RUNNOTE" EntityType="Self.TBL_RUNNOTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_SIGCONTROL" EntityType="Self.TBL_SIGCONTROL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_SITE" EntityType="Self.TBL_SITE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_SYSSET" EntityType="Self.TBL_SYSSET" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_USER" EntityType="Self.TBL_USER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_USERPROTECT" EntityType="Self.TBL_USERPROTECT" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

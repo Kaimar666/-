@@ -1,0 +1,288 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+.login input {
+    height: 28px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: url(../Content/assets/img/background01.jpg) center no-repeat;
+    background-size: cover;
+}
+
+.login-main-body {
+    padding-top: 5%;
+}
+
+.login-bottom {
+    position: fixed;
+    bottom: 0;
+    display: inline-block;
+    width: 100%;
+    z-index: 199;
+}
+
+.login-bg, .login-holder {
+    width: 520px;
+    height: 406px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%); /* IE9及以上支持 */
+    border: 1px solid #25cbf5;
+    border-radius: 12px
+}
+
+.login-bg {
+    background-color: rgba(255,255,255,0.1);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.login-holder {
+    z-index: 99;
+}
+
+.login-layout {
+    text-align: left;
+    margin: 0 auto;
+    margin-top: 30px;
+    color: white;
+    width: 440px;
+}
+
+.userName, .password {
+    border: 0;
+    background-color: transparent !important;
+    color: #fff;
+    width: 82%;
+}
+
+.userName::-moz-placeholder {
+    color: #fff;
+    padding-left: 15px;
+}
+
+.userName::-webkit-input-placeholder {
+    color: #fff;
+    padding-left: 15px;
+}
+
+.password::-moz-placeholder {
+    color: #fff;
+    padding-left: 15px;
+}
+
+.password::-webkit-input-placeholder {
+    color: #fff;
+    padding-left: 15px;
+}
+
+#code::-webkit-input-placeholder {
+    color: #fff;
+}
+
+#col::-moz-placeholder {
+    color: #fff;
+}
+
+input.loginbtn {
+    padding: 8px;
+    height: 32px;
+}
+
+select, input[type=text] {
+    padding: 0px !important;
+    border: 0;
+    color: #fff;
+    width: 82%;
+    border: 0;
+    outline: none;
+}
+
+.usericon img, .passicon img {
+    width: 15px;
+}
+
+.login-layout tr {
+    height: 50px;
+}
+
+.textPrent td {
+    background-color: #123653;
+    background: rgb(196,240,243,0.06);
+    margin: auto;
+    padding: 10px 20px;
+}
+
+.login-layout tr:nth-of-type(2) {
+    display: block;
+    margin: 10px 0;
+}
+
+.login-layout tr:nth-of-type(2) > td {
+    display: block
+}
+
+.textPrent td span {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    width: 60px
+}
+
+#lbSaveMe {
+    font-size: 14px;
+}
+
+#lan {
+    padding: 3px 0 !important;
+    color: #666;
+}
+
+#btnAbs {
+    width: 100%;
+    height: 50px;
+    background-color: #123653;
+    background: rgb(196,240,243,0.06);
+    border: 1px solid transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+#btnAbs:hover {
+    background-color: transparent;
+    border: 1px solid #11485f;
+}
+
+.userName, .password {
+    border-radius: 4px;
+    border: 0;
+    outline: none;
+}
+
+.notice {
+    overflow: hidden;
+    width: 25%;
+    padding: 20px;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    float: right;
+    margin-right: 40%;
+}
+
+.noTitle {
+    color: #ffcb00;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 25px;
+}
+
+.noContet {
+    color: #fff;
+    text-indent: 2em;
+    line-height: 45px;
+    font-size: 22px;
+}
+
+.noFooter {
+    color: #fff;
+    text-align: right;
+    font-size: 22px;
+}
+
+.noColor {
+    color: #ffcb00;
+}
+
+.logo_title {
+    font-size: 35px;
+    color: #ffffff;
+    font-weight: 800;
+    text-shadow: 0px 0px 42px #1b80de;
+    background: url(../Content/assets/img/fgx.png) center no-repeat;
+    width: 1240px;
+    height: 98px;
+    text-align: center;
+    line-height: 98px;
+    margin: auto;
+    margin-top: 80px
+}
+
+
+/*checkbox样式*/
+
+#reme + label {
+    background-color: #324b63;
+    width: 14px;
+    border-radius: 2px;
+    height: 14px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 14px;
+    margin: 10px
+}
+
+#reme:checked + label {
+    background-color: #324b63;
+}
+
+#reme:checked + label:after {
+    content: "\2714";
+    color: #ace7f6
+}
+
+.login_tabtitle > img:nth-of-type(1) {
+    transform: rotateY(180deg);
+}
+
+.login_tabtitle {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 70px;
+    color: white;
+    background: rgb(196,240,243,0.1);
+}
+
+/*取消密码记住的背景色*/
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-text-fill-color: #ededed !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    background-color: transparent;
+    background-image: none;
+    transition: background-color 50000s ease-in-out 0s;
+}
+
+.another_batch {
+    font-weight: normal;
+    font-size: 14px
+}
+
+.qr_codes {
+    width: 200px;
+    text-align: center;
+    margin-top: 490px;
+    float: right;
+    margin-right: 150px;
+}
+
+.qr_codes > p {
+    color: #25c5ed;
+}
+
+.qr_codes > img {
+    width: 95px;
+    height: 95px
+}

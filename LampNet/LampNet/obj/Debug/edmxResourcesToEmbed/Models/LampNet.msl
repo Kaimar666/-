@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LampNetModelStoreContainer" CdmEntityContainer="LampNetEntities">
+    <EntitySetMapping Name="TBL_AMMETER">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_AMMETER">
+        <MappingFragment StoreEntitySet="TBL_AMMETER">
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+          <ScalarProperty Name="ammeterName" ColumnName="ammeterName" />
+          <ScalarProperty Name="ammeterGroup" ColumnName="ammeterGroup" />
+          <ScalarProperty Name="ammeterModel" ColumnName="ammeterModel" />
+          <ScalarProperty Name="ammeterRefpower" ColumnName="ammeterRefpower" />
+          <ScalarProperty Name="ammeterOldload" ColumnName="ammeterOldload" />
+          <ScalarProperty Name="ammeterNewload" ColumnName="ammeterNewload" />
+          <ScalarProperty Name="ammeterRate" ColumnName="ammeterRate" />
+          <ScalarProperty Name="ammeterAlarm" ColumnName="ammeterAlarm" />
+          <ScalarProperty Name="ammeterStatus" ColumnName="ammeterStatus" />
+          <ScalarProperty Name="ammeterSwistatus" ColumnName="ammeterSwistatus" />
+          <ScalarProperty Name="ammeterLife" ColumnName="ammeterLife" />
+          <ScalarProperty Name="ammeterAcctime" ColumnName="ammeterAcctime" />
+          <ScalarProperty Name="ammeterNote" ColumnName="ammeterNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_CTRCONTROL">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_CTRCONTROL">
+        <MappingFragment StoreEntitySet="TBL_CTRCONTROL">
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="ctrcontrolTimweek" ColumnName="ctrcontrolTimweek" />
+          <ScalarProperty Name="ctrcontrolLigweek" ColumnName="ctrcontrolLigweek" />
+          <ScalarProperty Name="ctrcontrolTimopetime" ColumnName="ctrcontrolTimopetime" />
+          <ScalarProperty Name="ctrcontrolTimclotime" ColumnName="ctrcontrolTimclotime" />
+          <ScalarProperty Name="ctrcontrolOpeligvalue" ColumnName="ctrcontrolOpeligvalue" />
+          <ScalarProperty Name="ctrcontrolCloligvalue" ColumnName="ctrcontrolCloligvalue" />
+          <ScalarProperty Name="ctrcontrolLigvalsource" ColumnName="ctrcontrolLigvalsource" />
+          <ScalarProperty Name="ctrcontrolSystime" ColumnName="ctrcontrolSystime" />
+          <ScalarProperty Name="ctrcontrolSysweek" ColumnName="ctrcontrolSysweek" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_DEVICEPROTECT">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_DEVICEPROTECT">
+        <MappingFragment StoreEntitySet="TBL_DEVICEPROTECT">
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+          <ScalarProperty Name="deviceprotectKind" ColumnName="deviceprotectKind" />
+          <ScalarProperty Name="deviceprotectModule" ColumnName="deviceprotectModule" />
+          <ScalarProperty Name="deviceprotectLoginfo" ColumnName="deviceprotectLoginfo" />
+          <ScalarProperty Name="deviceprotectOpttime" ColumnName="deviceprotectOpttime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_DOCUMENT">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_DOCUMENT">
+        <MappingFragment StoreEntitySet="TBL_DOCUMENT">
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+          <ScalarProperty Name="documentKind" ColumnName="documentKind" />
+          <ScalarProperty Name="documentNote" ColumnName="documentNote" />
+          <ScalarProperty Name="documentTime" ColumnName="documentTime" />
+          <ScalarProperty Name="documentUrl" ColumnName="documentUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ENERGY">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_ENERGY">
+        <MappingFragment StoreEntitySet="TBL_ENERGY">
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="energyDate" ColumnName="energyDate" />
+          <ScalarProperty Name="energyWorktime" ColumnName="energyWorktime" />
+          <ScalarProperty Name="energyStavalue" ColumnName="energyStavalue" />
+          <ScalarProperty Name="energyEndvalue" ColumnName="energyEndvalue" />
+          <ScalarProperty Name="energyPrepower" ColumnName="energyPrepower" />
+          <ScalarProperty Name="energyCurpower" ColumnName="energyCurpower" />
+          <ScalarProperty Name="energyPrerate" ColumnName="energyPrerate" />
+          <ScalarProperty Name="energyCurrate" ColumnName="energyCurrate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_FEEDBACK">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_FEEDBACK">
+        <MappingFragment StoreEntitySet="TBL_FEEDBACK">
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="feedbackTime" ColumnName="feedbackTime" />
+          <ScalarProperty Name="feedbackNote" ColumnName="feedbackNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_RUN">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_RUN">
+        <MappingFragment StoreEntitySet="TBL_RUN">
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="runVolt" ColumnName="runVolt" />
+          <ScalarProperty Name="runCurrent" ColumnName="runCurrent" />
+          <ScalarProperty Name="runStavalue" ColumnName="runStavalue" />
+          <ScalarProperty Name="runFreshtime" ColumnName="runFreshtime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_RUNNOTE">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_RUNNOTE">
+        <MappingFragment StoreEntitySet="TBL_RUNNOTE">
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+          <ScalarProperty Name="runnoteAlastatus" ColumnName="runnoteAlastatus" />
+          <ScalarProperty Name="runnoteAlatime" ColumnName="runnoteAlatime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_SIGCONTROL">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_SIGCONTROL">
+        <MappingFragment StoreEntitySet="TBL_SIGCONTROL">
+          <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+          <ScalarProperty Name="ammeterSwistatus" ColumnName="ammeterSwistatus" />
+          <ScalarProperty Name="sigcontrolIndtime" ColumnName="sigcontrolIndtime" />
+          <ScalarProperty Name="sigcontrolInsstatime" ColumnName="sigcontrolInsstatime" />
+          <ScalarProperty Name="sigcontrolInsendtime" ColumnName="sigcontrolInsendtime" />
+          <ScalarProperty Name="sigcontrolAlacurup" ColumnName="sigcontrolAlacurup" />
+          <ScalarProperty Name="sigcontrolAlacurlow" ColumnName="sigcontrolAlacurlow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_SITE">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_SITE">
+        <MappingFragment StoreEntitySet="TBL_SITE">
+          <ScalarProperty Name="siteId" ColumnName="siteId" />
+          <ScalarProperty Name="siteName" ColumnName="siteName" />
+          <ScalarProperty Name="siteGroup" ColumnName="siteGroup" />
+          <ScalarProperty Name="siteModel" ColumnName="siteModel" />
+          <ScalarProperty Name="siteStatus" ColumnName="siteStatus" />
+          <ScalarProperty Name="siteSwistatus" ColumnName="siteSwistatus" />
+          <ScalarProperty Name="siteIp" ColumnName="siteIp" />
+          <ScalarProperty Name="siteContime" ColumnName="siteContime" />
+          <ScalarProperty Name="siteInssite" ColumnName="siteInssite" />
+          <ScalarProperty Name="sitePurtime" ColumnName="sitePurtime" />
+          <ScalarProperty Name="siteLife" ColumnName="siteLife" />
+          <ScalarProperty Name="siteAcctime" ColumnName="siteAcctime" />
+          <ScalarProperty Name="siteNote" ColumnName="siteNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_SYSSET">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_SYSSET">
+        <MappingFragment StoreEntitySet="TBL_SYSSET">
+          <ScalarProperty Name="syssetId" ColumnName="syssetId" />
+          <ScalarProperty Name="syssetName" ColumnName="syssetName" />
+          <ScalarProperty Name="syssetOpevalue" ColumnName="syssetOpevalue" />
+          <ScalarProperty Name="syssetClovalue" ColumnName="syssetClovalue" />
+          <ScalarProperty Name="syssetAlatime" ColumnName="syssetAlatime" />
+          <ScalarProperty Name="syssetAlacurrent" ColumnName="syssetAlacurrent" />
+          <ScalarProperty Name="syssetNote" ColumnName="syssetNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_USER">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_USER">
+        <MappingFragment StoreEntitySet="TBL_USER">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userSex" ColumnName="userSex" />
+          <ScalarProperty Name="userPwd" ColumnName="userPwd" />
+          <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+          <ScalarProperty Name="userWechat" ColumnName="userWechat" />
+          <ScalarProperty Name="userStatus" ColumnName="userStatus" />
+          <ScalarProperty Name="userLlogtime" ColumnName="userLlogtime" />
+          <ScalarProperty Name="userExptime" ColumnName="userExptime" />
+          <ScalarProperty Name="userAut" ColumnName="userAut" />
+          <ScalarProperty Name="userNote" ColumnName="userNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_USERPROTECT">
+      <EntityTypeMapping TypeName="LampNetModel.TBL_USERPROTECT">
+        <MappingFragment StoreEntitySet="TBL_USERPROTECT">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userprotectKind" ColumnName="userprotectKind" />
+          <ScalarProperty Name="userprotectModule" ColumnName="userprotectModule" />
+          <ScalarProperty Name="userprotectLoginfo" ColumnName="userprotectLoginfo" />
+          <ScalarProperty Name="userprotectOpttime" ColumnName="userprotectOpttime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

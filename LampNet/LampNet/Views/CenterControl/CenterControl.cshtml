@@ -1,0 +1,225 @@
+﻿@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@{
+    Layout = "~/Views/Shared/ControlCenter_Layout.cshtml";
+    ViewBag.Title = "CenterControl";
+}
+@{
+    TBL_SITE[] sitearray = ViewBag.sitearray as TBL_SITE[];
+    TBL_CTRCONTROL[] allInfo = ViewBag.allInfo as TBL_CTRCONTROL[];
+    int nowPage = Convert.ToInt32(ViewBag.nowPage);
+    int sumPage = Convert.ToInt32(ViewBag.sumPage);
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user">
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="~/CenterControl/CenterControl">集中控制 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/CenterControl/CenterSettingTime">集中设置 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/SingleControl/SingleControl">单灯控制 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/SingleControl/SingleSettingTime">单灯设置 <i></i></a>
+        </li>
+    </ul>
+</nav>
+
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+        <div class="k-search">
+            <div style="display: inline-block">
+                <form action="~/CenterControl/CenterControlSelect" method="post" autocomplete="off">
+                        <span class="query">
+                        <span style="float: right">
+                            <span style="color:#333">
+                            站点：
+                            <select name="siteName">
+                            @{ if(allInfo == null)
+                                {
+                                    <option>无</option>
+                                }
+                                else
+                                {
+                                    foreach(var item in allInfo)
+                                    {
+                                        foreach(var site in sitearray)
+                                        {
+                                            if(item.siteId == site.siteId)
+                                            {
+                                                <option value="@site.siteName">@site.siteName</option>
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                            </select>
+                            <input id="siteId" name="siteId" type="text" value="" placeholder="请输入站点号">
+                            <input class="k-btn" type="submit" value="查询">
+                            </span>
+                        </span>
+                            </span>
+                    </form>
+            </div>
+            <div class="k-search" style="float: right;">
+                <a href="~/CenterControl/CenterControl" class="k-btn" style="color:aliceblue">刷新</a>
+            </div>
+        </div>
+        <div class="k-body">
+
+            <table class="k-grid fixed Export table-striped footable-res footable metro-blue footable-loaded" id="print">
+                <thead>
+                    <tr>
+                        <th style="width: 20px" data-sort-ignore="true">
+                            <input type="checkbox" id="ckAll">
+                        </th>
+                        <th class="footable-sortable">
+                            站点编号
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th class="footable-sortable">
+                            站点名称
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th class="footable-sortable">
+                            站点分组
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th style="width: 430px" class="footable-sortable">
+                            回路状态
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th style="width: 170px" class="footable-sortable">
+                            更新时间
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th data-sort-ignore="true">
+                            操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    @{
+                        foreach (var item in allInfo)
+                        {
+                        <tr class="alt">
+                            <td>
+                                <input type="checkbox" name="id" class="equip" value=@item.siteId>
+                            </td>
+                            <td>
+                                @item.siteId
+                            </td>
+                            <td>
+                                @{ 
+                                    int i = 0;
+                                    while(item.siteId != sitearray[i].siteId)
+                                    {
+                                        i++;
+                                    }
+                                }
+                                @sitearray[i].siteName
+                            </td>
+                            <td>
+                                @{ 
+                                    i = 0;
+                                    while(item.siteId != sitearray[i].siteId)
+                                    {
+                                        i++;
+                                    }
+                                }
+                                @sitearray[i].siteGroup
+                            </td>
+                            <td>
+                                <div>
+                                    <span style="display:inline" class="status1">
+                                        @{ 
+                                            i = 0;
+                                            while(item.siteId != sitearray[i].siteId)
+                                            {
+                                                i++;
+                                            }
+                                        }
+                                    @if (@sitearray[i].siteSwistatus == 0)
+                                    {
+                                        <span class="status0">关</span>
+                                        <span class="status0">关</span>
+                                        <span class="status0">关</span>
+                                        <span class="status0">关</span>
+                                        <span class="status0">关</span>
+                                        <span class="status0">关</span>
+                                        <span class="status0">关</span>
+                                        <span class="status0">关</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status1">开</span>
+                                        <span class="status1">开</span>
+                                        <span class="status1">开</span>
+                                        <span class="status1">开</span>
+                                        <span class="status1">开</span>
+                                        <span class="status1">开</span>
+                                        <span class="status1">开</span>
+                                        <span class="status1">开</span>
+                                    }
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                @{ 
+                                    i = 0;
+                                    while(item.siteId != sitearray[i].siteId)
+                                    {
+                                        i++;
+                                    }
+                                }
+                                @sitearray[i].siteContime
+                            </td>
+                            <td class="none_d">
+                                <form action="~/CenterControl/CenterControlDelete" method="get" autocomplete="off">
+                                    <div style="text-align: center">
+                                        <input type="text" id="siteId" name="siteId" value=@item.siteId hidden="hidden" />
+                                        <input class="k-btn" type="submit" value="编辑">
+                                        <input class="k-btn" type="submit" value="删除">
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                            }
+                    }
+                        </tbody>
+            </table>
+            <!--页面翻页标签-->
+        <div class="pager" style="text-align:right;margin-top:10px">
+            <span class="pageInfo">第@{@nowPage} / @{@sumPage}页，共@{@allInfo.Count()}条记录</span>
+            <span class="disabled">上一页</span>
+            <span class="current">@{@nowPage}</span>
+            <span class="disabled">下一页</span>&nbsp;<span class="jumpPage">跳转到第 <input title="回车跳转到指定页面" type="text" value="1" style="width:20px;text-align: center;"> 页</span>
+            <span class="pageSize">页面大小 30 </span>
+        </div>
+        </div>
+</div>
+

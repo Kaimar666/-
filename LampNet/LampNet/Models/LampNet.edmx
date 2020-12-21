@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LampNetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_AMMETER">
+          <Key>
+            <PropertyRef Name="ammeterId" />
+          </Key>
+          <Property Name="siteId" Type="int" />
+          <Property Name="ammeterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ammeterName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ammeterGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="ammeterModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="ammeterRefpower" Type="float" />
+          <Property Name="ammeterOldload" Type="float" />
+          <Property Name="ammeterNewload" Type="float" />
+          <Property Name="ammeterRate" Type="float" />
+          <Property Name="ammeterAlarm" Type="float" />
+          <Property Name="ammeterStatus" Type="int" />
+          <Property Name="ammeterSwistatus" Type="int" />
+          <Property Name="ammeterLife" Type="float" />
+          <Property Name="ammeterAcctime" Type="datetime" />
+          <Property Name="ammeterNote" Type="text" />
+        </EntityType>
+        <EntityType Name="TBL_CTRCONTROL">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="int" Nullable="false" />
+          <Property Name="ctrcontrolTimweek" Type="int" />
+          <Property Name="ctrcontrolLigweek" Type="int" />
+          <Property Name="ctrcontrolTimopetime" Type="time" Precision="7" />
+          <Property Name="ctrcontrolTimclotime" Type="time" Precision="7" />
+          <Property Name="ctrcontrolOpeligvalue" Type="float" />
+          <Property Name="ctrcontrolCloligvalue" Type="float" />
+          <Property Name="ctrcontrolLigvalsource" Type="int" />
+          <Property Name="ctrcontrolSystime" Type="datetime" />
+          <Property Name="ctrcontrolSysweek" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_DEVICEPROTECT">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="siteId" Type="int" />
+          <Property Name="ammeterId" Type="int" />
+          <Property Name="deviceprotectKind" Type="int" />
+          <Property Name="deviceprotectModule" Type="int" />
+          <Property Name="deviceprotectLoginfo" Type="nvarchar" MaxLength="100" />
+          <Property Name="deviceprotectOpttime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TBL_DOCUMENT">
+          <Key>
+            <PropertyRef Name="documentId" />
+          </Key>
+          <Property Name="documentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="documentKind" Type="int" />
+          <Property Name="documentNote" Type="text" />
+          <Property Name="documentTime" Type="datetime" />
+          <Property Name="documentUrl" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TBL_ENERGY">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="int" Nullable="false" />
+          <Property Name="energyDate" Type="date" />
+          <Property Name="energyWorktime" Type="float" />
+          <Property Name="energyStavalue" Type="float" />
+          <Property Name="energyEndvalue" Type="float" />
+          <Property Name="energyPrepower" Type="float" />
+          <Property Name="energyCurpower" Type="float" />
+          <Property Name="energyPrerate" Type="float" />
+          <Property Name="energyCurrate" Type="float" />
+        </EntityType>
+        <EntityType Name="TBL_FEEDBACK">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="feedbackTime" Type="datetime" />
+          <Property Name="feedbackNote" Type="text" />
+        </EntityType>
+        <EntityType Name="TBL_RUN">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="int" Nullable="false" />
+          <Property Name="runVolt" Type="float" />
+          <Property Name="runCurrent" Type="float" />
+          <Property Name="runStavalue" Type="float" />
+          <Property Name="runFreshtime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TBL_RUNNOTE">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siteId" Type="int" />
+          <Property Name="ammeterId" Type="int" />
+          <Property Name="runnoteAlastatus" Type="int" />
+          <Property Name="runnoteAlatime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TBL_SIGCONTROL">
+          <Key>
+            <PropertyRef Name="ammeterId" />
+          </Key>
+          <Property Name="ammeterId" Type="int" Nullable="false" />
+          <Property Name="ammeterSwistatus" Type="int" />
+          <Property Name="sigcontrolIndtime" Type="float" />
+          <Property Name="sigcontrolInsstatime" Type="time" Precision="7" />
+          <Property Name="sigcontrolInsendtime" Type="time" Precision="7" />
+          <Property Name="sigcontrolAlacurup" Type="float" />
+          <Property Name="sigcontrolAlacurlow" Type="float" />
+        </EntityType>
+        <EntityType Name="TBL_SITE">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siteName" Type="nvarchar" MaxLength="50" />
+          <Property Name="siteGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="siteModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="siteStatus" Type="int" />
+          <Property Name="siteSwistatus" Type="int" />
+          <Property Name="siteIp" Type="nvarchar" MaxLength="100" />
+          <Property Name="siteContime" Type="datetime" />
+          <Property Name="siteInssite" Type="nvarchar" MaxLength="200" />
+          <Property Name="sitePurtime" Type="date" />
+          <Property Name="siteLife" Type="float" />
+          <Property Name="siteAcctime" Type="datetime" />
+          <Property Name="siteNote" Type="text" />
+        </EntityType>
+        <EntityType Name="TBL_SYSSET">
+          <Key>
+            <PropertyRef Name="syssetId" />
+          </Key>
+          <Property Name="syssetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="syssetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="syssetOpevalue" Type="float" />
+          <Property Name="syssetClovalue" Type="float" />
+          <Property Name="syssetAlatime" Type="float" />
+          <Property Name="syssetAlacurrent" Type="float" />
+          <Property Name="syssetNote" Type="text" />
+        </EntityType>
+        <EntityType Name="TBL_USER">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" />
+          <Property Name="userSex" Type="int" />
+          <Property Name="userPwd" Type="nvarchar" MaxLength="100" />
+          <Property Name="userPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="userWechat" Type="nvarchar" MaxLength="50" />
+          <Property Name="userStatus" Type="int" />
+          <Property Name="userLlogtime" Type="datetime" />
+          <Property Name="userExptime" Type="datetime" />
+          <Property Name="userAut" Type="int" />
+          <Property Name="userNote" Type="text" />
+        </EntityType>
+        <EntityType Name="TBL_USERPROTECT">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="userprotectKind" Type="int" />
+          <Property Name="userprotectModule" Type="int" />
+          <Property Name="userprotectLoginfo" Type="nvarchar" MaxLength="100" />
+          <Property Name="userprotectOpttime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="LampNetModelStoreContainer">
+          <EntitySet Name="TBL_AMMETER" EntityType="Self.TBL_AMMETER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CTRCONTROL" EntityType="Self.TBL_CTRCONTROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_DEVICEPROTECT" EntityType="Self.TBL_DEVICEPROTECT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_DOCUMENT" EntityType="Self.TBL_DOCUMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ENERGY" EntityType="Self.TBL_ENERGY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_FEEDBACK" EntityType="Self.TBL_FEEDBACK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_RUN" EntityType="Self.TBL_RUN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_RUNNOTE" EntityType="Self.TBL_RUNNOTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_SIGCONTROL" EntityType="Self.TBL_SIGCONTROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_SITE" EntityType="Self.TBL_SITE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_SYSSET" EntityType="Self.TBL_SYSSET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_USER" EntityType="Self.TBL_USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_USERPROTECT" EntityType="Self.TBL_USERPROTECT" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LampNetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_AMMETER">
+          <Key>
+            <PropertyRef Name="ammeterId" />
+          </Key>
+          <Property Name="siteId" Type="Int32" />
+          <Property Name="ammeterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ammeterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ammeterGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ammeterModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ammeterRefpower" Type="Double" />
+          <Property Name="ammeterOldload" Type="Double" />
+          <Property Name="ammeterNewload" Type="Double" />
+          <Property Name="ammeterRate" Type="Double" />
+          <Property Name="ammeterAlarm" Type="Double" />
+          <Property Name="ammeterStatus" Type="Int32" />
+          <Property Name="ammeterSwistatus" Type="Int32" />
+          <Property Name="ammeterLife" Type="Double" />
+          <Property Name="ammeterAcctime" Type="DateTime" Precision="3" />
+          <Property Name="ammeterNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_CTRCONTROL">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="Int32" Nullable="false" />
+          <Property Name="ctrcontrolTimweek" Type="Int32" />
+          <Property Name="ctrcontrolLigweek" Type="Int32" />
+          <Property Name="ctrcontrolTimopetime" Type="Time" Precision="7" />
+          <Property Name="ctrcontrolTimclotime" Type="Time" Precision="7" />
+          <Property Name="ctrcontrolOpeligvalue" Type="Double" />
+          <Property Name="ctrcontrolCloligvalue" Type="Double" />
+          <Property Name="ctrcontrolLigvalsource" Type="Int32" />
+          <Property Name="ctrcontrolSystime" Type="DateTime" Precision="3" />
+          <Property Name="ctrcontrolSysweek" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TBL_DEVICEPROTECT">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="siteId" Type="Int32" />
+          <Property Name="ammeterId" Type="Int32" />
+          <Property Name="deviceprotectKind" Type="Int32" />
+          <Property Name="deviceprotectModule" Type="Int32" />
+          <Property Name="deviceprotectLoginfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="deviceprotectOpttime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TBL_DOCUMENT">
+          <Key>
+            <PropertyRef Name="documentId" />
+          </Key>
+          <Property Name="documentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="documentKind" Type="Int32" />
+          <Property Name="documentNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="documentTime" Type="DateTime" Precision="3" />
+          <Property Name="documentUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBL_ENERGY">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="Int32" Nullable="false" />
+          <Property Name="energyDate" Type="DateTime" Precision="0" />
+          <Property Name="energyWorktime" Type="Double" />
+          <Property Name="energyStavalue" Type="Double" />
+          <Property Name="energyEndvalue" Type="Double" />
+          <Property Name="energyPrepower" Type="Double" />
+          <Property Name="energyCurpower" Type="Double" />
+          <Property Name="energyPrerate" Type="Double" />
+          <Property Name="energyCurrate" Type="Double" />
+        </EntityType>
+        <EntityType Name="TBL_FEEDBACK">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="feedbackTime" Type="DateTime" Precision="3" />
+          <Property Name="feedbackNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_RUN">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="Int32" Nullable="false" />
+          <Property Name="runVolt" Type="Double" />
+          <Property Name="runCurrent" Type="Double" />
+          <Property Name="runStavalue" Type="Double" />
+          <Property Name="runFreshtime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TBL_RUNNOTE">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siteId" Type="Int32" />
+          <Property Name="ammeterId" Type="Int32" />
+          <Property Name="runnoteAlastatus" Type="Int32" />
+          <Property Name="runnoteAlatime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TBL_SIGCONTROL">
+          <Key>
+            <PropertyRef Name="ammeterId" />
+          </Key>
+          <Property Name="ammeterId" Type="Int32" Nullable="false" />
+          <Property Name="ammeterSwistatus" Type="Int32" />
+          <Property Name="sigcontrolIndtime" Type="Double" />
+          <Property Name="sigcontrolInsstatime" Type="Time" Precision="7" />
+          <Property Name="sigcontrolInsendtime" Type="Time" Precision="7" />
+          <Property Name="sigcontrolAlacurup" Type="Double" />
+          <Property Name="sigcontrolAlacurlow" Type="Double" />
+        </EntityType>
+        <EntityType Name="TBL_SITE">
+          <Key>
+            <PropertyRef Name="siteId" />
+          </Key>
+          <Property Name="siteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siteName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="siteGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="siteModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="siteStatus" Type="Int32" />
+          <Property Name="siteSwistatus" Type="Int32" />
+          <Property Name="siteIp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="siteContime" Type="DateTime" Precision="3" />
+          <Property Name="siteInssite" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="sitePurtime" Type="DateTime" Precision="0" />
+          <Property Name="siteLife" Type="Double" />
+          <Property Name="siteAcctime" Type="DateTime" Precision="3" />
+          <Property Name="siteNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_SYSSET">
+          <Key>
+            <PropertyRef Name="syssetId" />
+          </Key>
+          <Property Name="syssetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="syssetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="syssetOpevalue" Type="Double" />
+          <Property Name="syssetClovalue" Type="Double" />
+          <Property Name="syssetAlatime" Type="Double" />
+          <Property Name="syssetAlacurrent" Type="Double" />
+          <Property Name="syssetNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_USER">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userSex" Type="Int32" />
+          <Property Name="userPwd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userWechat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userStatus" Type="Int32" />
+          <Property Name="userLlogtime" Type="DateTime" Precision="3" />
+          <Property Name="userExptime" Type="DateTime" Precision="3" />
+          <Property Name="userAut" Type="Int32" />
+          <Property Name="userNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_USERPROTECT">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="userprotectKind" Type="Int32" />
+          <Property Name="userprotectModule" Type="Int32" />
+          <Property Name="userprotectLoginfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userprotectOpttime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="LampNetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_AMMETER" EntityType="Self.TBL_AMMETER" />
+          <EntitySet Name="TBL_CTRCONTROL" EntityType="Self.TBL_CTRCONTROL" />
+          <EntitySet Name="TBL_DEVICEPROTECT" EntityType="Self.TBL_DEVICEPROTECT" />
+          <EntitySet Name="TBL_DOCUMENT" EntityType="Self.TBL_DOCUMENT" />
+          <EntitySet Name="TBL_ENERGY" EntityType="Self.TBL_ENERGY" />
+          <EntitySet Name="TBL_FEEDBACK" EntityType="Self.TBL_FEEDBACK" />
+          <EntitySet Name="TBL_RUN" EntityType="Self.TBL_RUN" />
+          <EntitySet Name="TBL_RUNNOTE" EntityType="Self.TBL_RUNNOTE" />
+          <EntitySet Name="TBL_SIGCONTROL" EntityType="Self.TBL_SIGCONTROL" />
+          <EntitySet Name="TBL_SITE" EntityType="Self.TBL_SITE" />
+          <EntitySet Name="TBL_SYSSET" EntityType="Self.TBL_SYSSET" />
+          <EntitySet Name="TBL_USER" EntityType="Self.TBL_USER" />
+          <EntitySet Name="TBL_USERPROTECT" EntityType="Self.TBL_USERPROTECT" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LampNetModelStoreContainer" CdmEntityContainer="LampNetEntities">
+          <EntitySetMapping Name="TBL_AMMETER">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_AMMETER">
+              <MappingFragment StoreEntitySet="TBL_AMMETER">
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+                <ScalarProperty Name="ammeterName" ColumnName="ammeterName" />
+                <ScalarProperty Name="ammeterGroup" ColumnName="ammeterGroup" />
+                <ScalarProperty Name="ammeterModel" ColumnName="ammeterModel" />
+                <ScalarProperty Name="ammeterRefpower" ColumnName="ammeterRefpower" />
+                <ScalarProperty Name="ammeterOldload" ColumnName="ammeterOldload" />
+                <ScalarProperty Name="ammeterNewload" ColumnName="ammeterNewload" />
+                <ScalarProperty Name="ammeterRate" ColumnName="ammeterRate" />
+                <ScalarProperty Name="ammeterAlarm" ColumnName="ammeterAlarm" />
+                <ScalarProperty Name="ammeterStatus" ColumnName="ammeterStatus" />
+                <ScalarProperty Name="ammeterSwistatus" ColumnName="ammeterSwistatus" />
+                <ScalarProperty Name="ammeterLife" ColumnName="ammeterLife" />
+                <ScalarProperty Name="ammeterAcctime" ColumnName="ammeterAcctime" />
+                <ScalarProperty Name="ammeterNote" ColumnName="ammeterNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CTRCONTROL">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_CTRCONTROL">
+              <MappingFragment StoreEntitySet="TBL_CTRCONTROL">
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="ctrcontrolTimweek" ColumnName="ctrcontrolTimweek" />
+                <ScalarProperty Name="ctrcontrolLigweek" ColumnName="ctrcontrolLigweek" />
+                <ScalarProperty Name="ctrcontrolTimopetime" ColumnName="ctrcontrolTimopetime" />
+                <ScalarProperty Name="ctrcontrolTimclotime" ColumnName="ctrcontrolTimclotime" />
+                <ScalarProperty Name="ctrcontrolOpeligvalue" ColumnName="ctrcontrolOpeligvalue" />
+                <ScalarProperty Name="ctrcontrolCloligvalue" ColumnName="ctrcontrolCloligvalue" />
+                <ScalarProperty Name="ctrcontrolLigvalsource" ColumnName="ctrcontrolLigvalsource" />
+                <ScalarProperty Name="ctrcontrolSystime" ColumnName="ctrcontrolSystime" />
+                <ScalarProperty Name="ctrcontrolSysweek" ColumnName="ctrcontrolSysweek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_DEVICEPROTECT">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_DEVICEPROTECT">
+              <MappingFragment StoreEntitySet="TBL_DEVICEPROTECT">
+                <ScalarProperty Name="infoId" ColumnName="infoId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+                <ScalarProperty Name="deviceprotectKind" ColumnName="deviceprotectKind" />
+                <ScalarProperty Name="deviceprotectModule" ColumnName="deviceprotectModule" />
+                <ScalarProperty Name="deviceprotectLoginfo" ColumnName="deviceprotectLoginfo" />
+                <ScalarProperty Name="deviceprotectOpttime" ColumnName="deviceprotectOpttime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_DOCUMENT">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_DOCUMENT">
+              <MappingFragment StoreEntitySet="TBL_DOCUMENT">
+                <ScalarProperty Name="documentId" ColumnName="documentId" />
+                <ScalarProperty Name="documentKind" ColumnName="documentKind" />
+                <ScalarProperty Name="documentNote" ColumnName="documentNote" />
+                <ScalarProperty Name="documentTime" ColumnName="documentTime" />
+                <ScalarProperty Name="documentUrl" ColumnName="documentUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ENERGY">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_ENERGY">
+              <MappingFragment StoreEntitySet="TBL_ENERGY">
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="energyDate" ColumnName="energyDate" />
+                <ScalarProperty Name="energyWorktime" ColumnName="energyWorktime" />
+                <ScalarProperty Name="energyStavalue" ColumnName="energyStavalue" />
+                <ScalarProperty Name="energyEndvalue" ColumnName="energyEndvalue" />
+                <ScalarProperty Name="energyPrepower" ColumnName="energyPrepower" />
+                <ScalarProperty Name="energyCurpower" ColumnName="energyCurpower" />
+                <ScalarProperty Name="energyPrerate" ColumnName="energyPrerate" />
+                <ScalarProperty Name="energyCurrate" ColumnName="energyCurrate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_FEEDBACK">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_FEEDBACK">
+              <MappingFragment StoreEntitySet="TBL_FEEDBACK">
+                <ScalarProperty Name="infoId" ColumnName="infoId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="feedbackTime" ColumnName="feedbackTime" />
+                <ScalarProperty Name="feedbackNote" ColumnName="feedbackNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_RUN">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_RUN">
+              <MappingFragment StoreEntitySet="TBL_RUN">
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="runVolt" ColumnName="runVolt" />
+                <ScalarProperty Name="runCurrent" ColumnName="runCurrent" />
+                <ScalarProperty Name="runStavalue" ColumnName="runStavalue" />
+                <ScalarProperty Name="runFreshtime" ColumnName="runFreshtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_RUNNOTE">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_RUNNOTE">
+              <MappingFragment StoreEntitySet="TBL_RUNNOTE">
+                <ScalarProperty Name="infoId" ColumnName="infoId" />
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+                <ScalarProperty Name="runnoteAlastatus" ColumnName="runnoteAlastatus" />
+                <ScalarProperty Name="runnoteAlatime" ColumnName="runnoteAlatime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_SIGCONTROL">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_SIGCONTROL">
+              <MappingFragment StoreEntitySet="TBL_SIGCONTROL">
+                <ScalarProperty Name="ammeterId" ColumnName="ammeterId" />
+                <ScalarProperty Name="ammeterSwistatus" ColumnName="ammeterSwistatus" />
+                <ScalarProperty Name="sigcontrolIndtime" ColumnName="sigcontrolIndtime" />
+                <ScalarProperty Name="sigcontrolInsstatime" ColumnName="sigcontrolInsstatime" />
+                <ScalarProperty Name="sigcontrolInsendtime" ColumnName="sigcontrolInsendtime" />
+                <ScalarProperty Name="sigcontrolAlacurup" ColumnName="sigcontrolAlacurup" />
+                <ScalarProperty Name="sigcontrolAlacurlow" ColumnName="sigcontrolAlacurlow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_SITE">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_SITE">
+              <MappingFragment StoreEntitySet="TBL_SITE">
+                <ScalarProperty Name="siteId" ColumnName="siteId" />
+                <ScalarProperty Name="siteName" ColumnName="siteName" />
+                <ScalarProperty Name="siteGroup" ColumnName="siteGroup" />
+                <ScalarProperty Name="siteModel" ColumnName="siteModel" />
+                <ScalarProperty Name="siteStatus" ColumnName="siteStatus" />
+                <ScalarProperty Name="siteSwistatus" ColumnName="siteSwistatus" />
+                <ScalarProperty Name="siteIp" ColumnName="siteIp" />
+                <ScalarProperty Name="siteContime" ColumnName="siteContime" />
+                <ScalarProperty Name="siteInssite" ColumnName="siteInssite" />
+                <ScalarProperty Name="sitePurtime" ColumnName="sitePurtime" />
+                <ScalarProperty Name="siteLife" ColumnName="siteLife" />
+                <ScalarProperty Name="siteAcctime" ColumnName="siteAcctime" />
+                <ScalarProperty Name="siteNote" ColumnName="siteNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_SYSSET">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_SYSSET">
+              <MappingFragment StoreEntitySet="TBL_SYSSET">
+                <ScalarProperty Name="syssetId" ColumnName="syssetId" />
+                <ScalarProperty Name="syssetName" ColumnName="syssetName" />
+                <ScalarProperty Name="syssetOpevalue" ColumnName="syssetOpevalue" />
+                <ScalarProperty Name="syssetClovalue" ColumnName="syssetClovalue" />
+                <ScalarProperty Name="syssetAlatime" ColumnName="syssetAlatime" />
+                <ScalarProperty Name="syssetAlacurrent" ColumnName="syssetAlacurrent" />
+                <ScalarProperty Name="syssetNote" ColumnName="syssetNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_USER">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_USER">
+              <MappingFragment StoreEntitySet="TBL_USER">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userSex" ColumnName="userSex" />
+                <ScalarProperty Name="userPwd" ColumnName="userPwd" />
+                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+                <ScalarProperty Name="userWechat" ColumnName="userWechat" />
+                <ScalarProperty Name="userStatus" ColumnName="userStatus" />
+                <ScalarProperty Name="userLlogtime" ColumnName="userLlogtime" />
+                <ScalarProperty Name="userExptime" ColumnName="userExptime" />
+                <ScalarProperty Name="userAut" ColumnName="userAut" />
+                <ScalarProperty Name="userNote" ColumnName="userNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_USERPROTECT">
+            <EntityTypeMapping TypeName="LampNetModel.TBL_USERPROTECT">
+              <MappingFragment StoreEntitySet="TBL_USERPROTECT">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userprotectKind" ColumnName="userprotectKind" />
+                <ScalarProperty Name="userprotectModule" ColumnName="userprotectModule" />
+                <ScalarProperty Name="userprotectLoginfo" ColumnName="userprotectLoginfo" />
+                <ScalarProperty Name="userprotectOpttime" ColumnName="userprotectOpttime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,209 @@
+﻿@using LampNet.Models
+@using System.Collections
+@model LampNet.Models.TBL_USER
+@{
+    Layout = "~/Views/Shared/ManagementCenter_Layout.cshtml";
+    ViewBag.Title = "UserManagementIndex";
+}
+@{
+    TBL_USER[] allInfo = ViewBag.array as TBL_USER[];
+    int nowPage = Convert.ToInt32(ViewBag.nowPage);
+    int sumPage = Convert.ToInt32(ViewBag.sumPage);
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <!--一级菜单-->
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user" />
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li>
+            <a class="nav_head" href="../SiteManagement/Index">站点管理 <i></i></a>
+        </li>
+        <li>
+            <a class="nav_head" href="../AmmeterManagement/Index">电表管理 <i></i></a>
+        </li>
+        <li>
+            <a class="nav_head shadeActiveli" href="../UserManagement/Index">用户管理 <i class="block"></i></a>
+        </li>
+        <li>
+            <a class="nav_head" href="../LifeManagement/Index">生命周期 <i></i></a>
+        </li>
+        <li>
+            <a class="nav_head" href="../SettingManagement/Index">系统设置 <i></i></a>
+        </li>
+    </ul>
+</nav>
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+    <!--搜索栏-->
+    <div class="page-toolbar">
+            <div class="k-search">
+                    <form action="~/UserManagement/UserSelect" method="post" autocomplete="off">
+                        <span class="query">
+                        <span style="float: right">
+                            <span style="color:#333">
+                            用户：
+                            <select name="userName">
+                            @{ if(allInfo == null)
+                                {
+                                    <option>无</option>
+                                }
+                                else
+                                {
+                                    foreach(var item in allInfo)
+                                    {
+                                        <option value="@item.userName">@item.userName</option>
+                                    }
+                                }
+                                
+                            }
+                            </select>
+                            <input id="userId" name="userId" type="text" value="" placeholder="请输入用户号">
+                            <input class="k-btn" type="submit" value="查询">
+                            </span>
+                        </span>
+                            </span>
+                    </form>
+            </div>
+    </div>
+    <!--主表-->
+    <div class="k-body Export" id="print">
+        <table class="k-grid table-striped footable-res footable metro-blue footable-loaded" style="display: table;">
+            <thead>
+                <tr class="header">
+                    <th scope="col" data-sort-ignore="true">
+                        <input type="checkbox" id="checkAll">
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">用户ID</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">姓名</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">手机号</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">微信号</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">最后登录时间</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">过期日期</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">权限</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">状态</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" data-sort-ignore="true">
+                        备注
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in allInfo)
+                {
+                    <tr class="alt">
+                    <td><input type="checkbox" class="checkEq" value=@item.userId></td>
+                    <td>
+                        <div class="line-">@item.userId</div>
+                    </td>
+                    <td>
+                        <div class="line- query-eq-info"> @item.userName</div>
+                    </td>
+                    <td>
+                        <div class="line-">@item.userPhone</div>
+                    </td>
+                    <td>
+                        <div class="line-">@item.userWechat</div>
+                    </td>
+                        <td>
+                        <div class="line-">@item.userLlogtime</div>
+                    </td>
+                        <td>
+                        <div class="line-">@item.userExptime</div>
+                    </td>
+                    <td>
+                        <div class="line-">
+                            @if (@item.userAut == 0)
+                            {
+                                <span>员工</span>
+                            }
+                            else if (@item.userAut == 1)
+                            {
+                                <span>管理员</span>
+                            }
+                            else if (@item.userAut == 2)
+                            {
+                                <span>超级管理员</span>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="line-">
+                            @if (@item.userStatus == 0)
+                            {
+                                <span>正常</span>
+                            }
+                            else if (@item.userStatus == 1)
+                            {
+                                <span>离线</span>
+                            }
+                            else if (@item.userStatus == 2)
+                            {
+                                <span>异常</span>
+                            }
+                        </div>
+                    </td>
+                        <td>
+                        <div class="line-">@item.userNote</div>
+                    </td>
+                    @*<td class="none_d">
+                        <form action="~/UserManagement/UserDelete" method="get" autocomplete="off">
+                                <div style="text-align: center">
+                                    <input type="text" id="userId" name="userId" value=@item.userId hidden="hidden" />
+                                    <input class="k-btn" type="submit" value="编辑">
+                                    <input class="k-btn" type="submit" value="删除">
+                                </div>
+                            </form>
+                    </td>*@
+                </tr>
+                }
+            </tbody>
+        </table>
+
+
+        <!--页面翻页标签-->
+        <div class="pager" style="text-align:right;margin-top:10px">
+            <span class="pageInfo">第@{@nowPage} / @{@sumPage}页，共@{@allInfo.Count()}条记录</span>
+            <span class="disabled">上一页</span>
+            <span class="current">@{@nowPage}</span>
+            <span class="disabled">下一页</span>&nbsp;<span class="jumpPage">跳转到第 <input title="回车跳转到指定页面" type="text" value="1" style="width:20px;text-align: center;"> 页</span>
+            <span class="pageSize">页面大小 30 </span>
+        </div>
+    </div>
+</div>

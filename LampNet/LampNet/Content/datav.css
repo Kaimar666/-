@@ -1,0 +1,798 @@
+body {
+    width: 100%;
+    overflow: hidden;
+    background: #060015;
+    color: white;
+}
+
+.datav_title {
+    margin-top: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    background-image: url(assets/img/);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 98%;
+    height: 8%;
+    margin: 10px auto 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.weather_box {
+    position: absolute;
+    left: -7px;
+    top: 42px;
+    font-size: 14px;
+    color: #1ad1ff;
+}
+
+.datav_title > div {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    font-size: 14px;
+    color: #1ad1ff;
+    font-weight: normal;
+}
+
+.weather_box > li {
+    float: left;
+    font-weight: normal;
+    padding: 0 10px;
+}
+
+.weather_box > li > img {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.datav_title > p {
+    word-wrap: break-word;
+    width: 400px;
+    text-align: center;
+    margin: auto;
+    line-height: 69px;
+}
+
+.datav_visual_box {
+    padding: 1%;
+    height: 88%;
+    overflow: hidden;
+}
+
+.datav_visual_box > div {
+    float: left;
+}
+
+.datav_left {
+    width: 21.5%;
+    height: 100%;
+}
+
+.datav_center {
+    width: 55%;
+    margin: 0 1%;
+    height: 100%;
+}
+
+.datav_right {
+    width: 21.5%;
+    height: 100%;
+}
+
+.equipment_box,
+.single_lamp_box {
+    width: 100%;
+    height: 36.2%;
+    margin-bottom: 5%;
+}
+
+.energy_box {
+    height: 22.1%;
+}
+
+.map_box {
+    height: 56.3%;
+    position: relative;
+    padding: 0 !important;
+}
+
+.map_box > div {
+    height: 100%;
+}
+
+.energy_time_box {
+    height: 16.3%;
+    margin: 1.8% 0;
+}
+
+.energy_time_box > div {
+    float: left;
+    width: 32%;
+    height: 100%;
+}
+
+.energy_time_box > div:nth-of-type(2) {
+    margin: 0 2%
+}
+
+.work_order_box {
+    height: 22.3%;
+}
+
+.work_order_box > div,
+.workLifeChart {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.workLifeChart {
+    width: 100%;
+    padding-left: 6px;
+}
+
+.energy_data_box {
+    height: 56.3%;
+}
+
+.energy_data_box > ul {
+    height: 90%;
+}
+
+.energy_data_box > ul > li {
+    height: 23%
+}
+
+.energy_minute_box {
+    height: 16.3%;
+    margin: 5% 0;
+}
+
+.energy_minute_box > div,
+.energy_day_box > div {
+    height: 90%;
+    overflow: hidden;
+}
+
+.energy_day_box {
+    height: 22.1%;
+}
+
+.rect {
+    background: #06051e;
+    padding: 6px;
+    /***/
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #203978;
+    position: relative;
+}
+
+.rect > .bt, .rect > .bb {
+    width: 93%;
+    height: 10px;
+    position: absolute;
+}
+
+.rect > .br, .rect > .bl {
+    width: 10px;
+    height: 92%;
+    position: absolute;
+}
+
+.bt {
+    border-top: 2px solid #050014;
+    left: 3.5%;
+    top: -2px;
+}
+
+.bb {
+    border-bottom: 2px solid #050014;
+    left: 3.5%;
+    bottom: -2px;
+}
+
+.br {
+    border-right: 2px solid #050014;
+    right: -2px;
+    top: 4%;
+}
+
+.bl {
+    border-left: 2px solid #050014;
+    left: -2px;
+    top: 4%;
+}
+
+/**å¾®è°ƒ*/
+.energy_box > .br, .energy_box > .bl, .work_order_box > .br, .work_order_box > .bl, .energy_day_box > .br, .energy_day_box > .bl {
+    height: 88%;
+    top: 6%;
+}
+
+.map_box > .bt, .map_box > .bb, .work_order_box > .bt, .work_order_box > .bb {
+    width: 97%;
+    left: 1.5%;
+}
+
+.map_box > .bl, .map_box > .br, .energy_data_box > .bl, .energy_data_box > .br {
+    height: 95%;
+    top: 2.5%;
+}
+
+.energy_time_box > div > .bl, .energy_time_box > div > .br, .energy_minute_box > .bl, .energy_minute_box > .br {
+    height: 82%;
+    top: 9%;
+}
+
+.datav_visual_box h6 {
+    font-weight: normal;
+    color: #feffff;
+    font-size: 16px;
+    border-left: 5px solid #1ad1ff;
+    padding: 0 10px
+}
+
+/* å·¦ */
+.equipment_box > p,
+.single_lamp_box > p {
+    font-size: 14px;
+    margin: 6% 0;
+}
+
+.equipment_box > p > span,
+.single_lamp_box > p > span {
+    color: #1ad1ff;
+    font-size: 16px;
+    letter-spacing: 8px;
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+.equipment_box > ul,
+.single_lamp_box > ul {
+    overflow: hidden;
+}
+
+.equipment_box > ul > li,
+.single_lamp_box > ul > li {
+    width: 33.3%;
+    float: left;
+    text-align: center;
+}
+
+.equipment_box > ul > li > p,
+.single_lamp_box > ul > li > p {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.equipment_box > ul > li > span,
+.single_lamp_box > ul > li > span {
+    font-size: 16px;
+    color: #1ad1ff;
+}
+
+.equipment_box > div,
+.single_lamp_box > div {
+    height: 45%;
+}
+
+.energy_box > p {
+    font-size: 14px;
+    margin: 5%;
+}
+
+.energy_box > h6 {
+    margin-bottom: 8%;
+}
+
+.energy_box > p > span,
+.report_state > ul > li > span {
+    color: #1ad1ff !important;
+}
+/* ä¸­ */
+
+.center_map_menu {
+    font-size: 16px;
+    border-left: 5px solid #1ad1ff;
+    color: #5b96bc;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    z-index: 999999999;
+}
+
+.center_map_menu > li {
+    padding: 0 10px;
+    float: left;
+    cursor: pointer;
+}
+
+.map_active {
+    color: white;
+}
+
+.report_state {
+    height: 82%;
+}
+
+.report_state > ul {
+    float: left;
+    font-size: 13px;
+    width: 50%;
+    height: 100%;
+}
+
+.report_state > ul > li {
+    margin: 8%
+}
+
+.report_state > div {
+    float: right;
+    width: 50%;
+    margin-top: -10%;
+    vertical-align: middle;
+}
+
+.report_new {
+    height: 86%;
+    overflow: hidden;
+}
+
+.report_new_ul > li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+    color: #1ad1ff;
+    /*padding: 2.6%*/
+    line-height: 26px;
+}
+
+.work_order_list {
+    margin: 2% 0;
+    overflow: hidden;
+}
+
+.work_order_list > li {
+    font-size: 14px;
+    float: left;
+    margin-right: 3%;
+}
+
+.work_order_list > li > span {
+    color: #1ad1ff;
+    font-size: 16px;
+    letter-spacing: 4px;
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+.energy_time_day > .report_state > ul > li {
+    margin: 4% 8% !important;
+}
+/* å³ */
+.energy_data > li {
+    margin-top: 4%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.energy_data > li > p {
+    font-size: 14px;
+}
+
+.energy_data > li > p:nth-of-type(2) {
+    font-size: 18px;
+    color: #1ad1ff;
+    width: 100%;
+    margin: 1%;
+    padding-left: 20%;
+}
+
+.energy_data > li > div {
+    width: 75%;
+}
+
+.energy_data > li > div {
+    position: relative
+}
+
+.energy_data > li > div > i {
+    display: block;
+    position: absolute;
+    background: #060015;
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0
+}
+
+.energy_data > li strong {
+    font-size: 18px;
+    color: #1ad1ff;
+    float: right;
+    margin-top: -16px;
+    /*margin-right: 8%;*/
+}
+
+.energy_text {
+    /*flex-shrink: 12px;*/
+    overflow: hidden;
+    margin-bottom: 2%;
+}
+
+.energy_text > p:first-of-type {
+    float: left;
+}
+
+.energy_text > p:last-of-type {
+    float: right;
+}
+
+.energy_text > p:last-of-type > span {
+    color: #1ad1ff;
+    margin-left: 10px;
+}
+/* 1 */
+
+.g2-guide-html {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1;
+    /* color: #19fdf6; */
+}
+
+.g2-guide-html .title {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.g2-guide-html .value {
+    font-size: 14px;
+    font-weight: bold;
+}
+/* 3 */
+
+.expand {
+    height: 6px;
+    margin: 2px 0;
+    background: -webkit-linear-gradient(left, #165be1, #19fcf5);
+    background: -webkit-linear-gradient(left, #165be1, #19fcf5);
+    display: block;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+}
+
+/* 4 */
+
+.workLifeChart > li {
+    float: left;
+    height: 50%;
+    width: 12%;
+}
+
+.workLifeChart > li > span {
+    font-size: 14px;
+    color: #5b96bc;
+    display: inline-block;
+    margin-bottom: 4%;
+    margin-left: 12%;
+}
+
+.workLifeChart > li > p {
+    position: relative;
+    color: white;
+    height: 69%;
+    line-height: 485%;
+    text-align: center;
+    width: 49%;
+    z-index: 1
+    /*   border-radius: 50%;
+              background: #1293b3;
+            -moz-box-shadow: 0px 0px 8px #1AD1FF;
+    -webkit-box-shadow: 0px 0px 8px #1AD1FF;
+    box-shadow: 0px 0px 8px #1AD1FF;*/
+}
+
+.workLifeChart > li > p > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1
+}
+
+.workLifeChart > li > p > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0
+}
+
+.workLifeChart > li > p::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    right: -104%;
+    background: #1ad1ff;
+}
+
+.workLifeChart > li:nth-last-child(2) > p::after,
+.workLifeChart > li:nth-last-child(3) > p::after {
+    background: #1071c4;
+}
+
+.workLifeChart > li:nth-last-child(4) > p::after {
+    background: linear-gradient(to right, #199fc3, #1071c4);
+}
+
+.workLifeChart > li:nth-last-child(5) > p::after {
+    background: #199fc3;
+}
+
+.workLifeChart > li:nth-last-child(6) > p::after {
+    background: linear-gradient(to right, #1ad1ff, #199fc3);
+}
+
+.workLifeChart > li:last-of-type > p::after {
+    display: none;
+}
+
+.hide {
+    display: none;
+}
+
+.info {
+    background: #363F49;
+    color: #A0A7B4;
+    padding: 10px;
+    max-width: 300px;
+    min-width: 200px;
+    font-size: 12px;
+}
+
+/* å“åº”å¼ */
+/* å°äºŽ1700 */
+@media screen and (max-width:1700px) {
+    .report_new {
+        height: 84%;
+        overflow: hidden;
+    }
+}
+/* å¤§äºŽ1700 */
+@media screen and (min-aspect-ratio:25/10) {
+    .datav_visual_box {
+        padding: 0 0.3%;
+    }
+
+    .datav_visual_box > div {
+        margin: 0 0.3%;
+    }
+
+    .datav_center {
+        float: right !important;
+    }
+
+    .datav_center > div {
+        float: left;
+        height: 100%;
+    }
+    /* å®½åº¦ */
+    .datav_center {
+        width: 71.6%;
+    }
+
+    .datav_left,
+    .datav_right {
+        width: 13.2%;
+    }
+
+    .map_box {
+        width: 61%;
+    }
+
+    .energy_time_box,
+    .work_order_box {
+        width: 18.5%;
+    }
+
+    .energy_time_box {
+        margin: 0 1%;
+    }
+    /* å³ä¾§ */
+    .energy_time_box > div {
+        float: none;
+        width: 100%;
+        height: 32.2%;
+    }
+
+    .energy_time_box > div:nth-of-type(2) {
+        margin: 5% 0;
+    }
+
+    .equipment_box,
+    .single_lamp_box {
+        height: 37.3%;
+    }
+
+    .energy_minute_box {
+        height: 18.3%;
+    }
+
+    .workLifeChart > li {
+        float: left;
+        width: 50%;
+        height: 18%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 20%;
+        margin-top: 1%;
+    }
+
+    .workLifeChart > li:nth-of-type(even) {
+        text-align: center
+    }
+
+    .workLifeChart > li:nth-of-type(even) > p {
+        margin-left: 28%;
+    }
+
+    .workLifeChart > li > p {
+        position: relative;
+        color: white;
+        height: 50%;
+        line-height: 466%;
+        text-align: center;
+        width: 50%;
+    }
+
+    .workLifeChart > li > p::after {
+        content: none;
+    }
+
+    .workLifeChart > li:nth-of-type(2) > p::before,
+    .workLifeChart > li:nth-of-type(6) > p::before,
+    .workLifeChart > li:last-of-type > p::before {
+        content: "";
+        width: 140%;
+        height: 4px;
+        border-radius: 5px;
+        position: absolute;
+        top: 50%;
+        left: -146%;
+        background: #1ad1ff;
+    }
+
+    .workLifeChart > li:nth-of-type(2) > p::after,
+    .workLifeChart > li:nth-of-type(3) > p::after,
+    .workLifeChart > li:nth-of-type(6) > p::after {
+        content: "";
+        width: 4px;
+        height: 128%;
+        border-radius: 5px;
+        position: absolute;
+        top: 114%;
+        left: 48%;
+        background: #1ad1ff;
+    }
+
+    .workLifeChart > li:nth-of-type(3) > p::before {
+        content: "";
+        width: 140%;
+        height: 4px;
+        border-radius: 5px;
+        position: absolute;
+        top: 50%;
+        left: 110%;
+        background: #1ad1ff;
+    }
+
+    .work_order_box > div {
+        height: 80%;
+    }
+
+    .workLifeChart {
+    }
+
+    .work_order_list {
+        margin: 8% 0;
+    }
+
+    .work_order_list > li {
+        margin-bottom: 4%;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .rect > .bt, .rect > .bb {
+        width: 93%;
+        height: 10px;
+        position: absolute;
+    }
+
+    .rect > .br, .rect > .bl {
+        width: 10px;
+        height: 92%;
+        position: absolute;
+    }
+
+    .energy_data_box > .br, .energy_data_box > .bl {
+        height: 95%;
+        top: 2.5%;
+    }
+
+    .energy_minute_box > .br, .energy_minute_box > .bl,
+    .energy_day_box > .br, .energy_day_box > .bl,
+    .energy_box > .br, .energy_box > .bl {
+        height: 86%;
+        top: 7%;
+    }
+
+    .energy_time_hour > .bt, .energy_time_hour > .bb,
+    .energy_time_day > .bt, .energy_time_day > .bb,
+    .energy_time_month > .bt, .energy_time_month > .bb,
+    .work_order_box > .bt, .work_order_box > .bb {
+        width: 92%;
+        left: 4%;
+    }
+
+    .energy_time_hour > .br, .energy_time_hour > .bl,
+    .energy_time_day > .br, .energy_time_day > .bl,
+    .energy_time_month > .br, .energy_time_month > .bl {
+        height: 90% !important;
+        top: 5% !important;
+    }
+
+    .work_order_box > .br, .work_order_box > .bl {
+        height: 96.6%;
+        top: 1.7%;
+    }
+
+    .map_box > .bt, .map_box > .bb {
+        width: 97%;
+        left: 1.5%;
+    }
+
+    .map_box > .br, .map_box > .bl {
+        height: 97%;
+        top: 1.5%
+    }
+}
+
+/* å°äºŽ1500 */
+@media screen and (max-width:1500px) {
+    .work_order_list > li > span {
+        letter-spacing: 0px !important;
+    }
+}
+/* é«˜åº¦å°äºŽ800 */
+@media screen and (max-height:800px) {
+    .energy_data > li {
+        margin-top: 3%;
+    }
+
+    .energy_data > li > p:nth-of-type(2) {
+        font-size: 14px;
+    }
+
+    .work_order_list {
+        margin: 1.5% 0;
+    }
+}

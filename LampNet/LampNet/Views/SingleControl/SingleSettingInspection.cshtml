@@ -1,0 +1,167 @@
+﻿@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@{
+    Layout = "~/Views/Shared/ControlCenter_Layout.cshtml";
+    ViewBag.Title = "SingleSettingInspection";
+}
+@{
+    TBL_SIGCONTROL[] allInfo = ViewBag.allInfo as TBL_SIGCONTROL[];
+    TBL_AMMETER[] ammeter = ViewBag.ammeter as TBL_AMMETER[];
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user">
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head" href="~/CenterControl/CenterControl">集中控制 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/CenterControl/CenterSettingTime">集中设置 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/SingleControl/SingleControl">单灯控制 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="~/SingleControl/SingleSettingTime">单灯设置 <i class="block"></i></a>
+        </li>
+    </ul>
+    <!--三级菜单-->
+    <div class="shade">
+        <ul class="offset_left">
+            <li>
+                <a class="menuTopLists shade_active" href="~/SingleControl/SingleSettingTime">单灯设置</a>
+            </li>
+            <li>
+                <a class="menuTopLists" href="~/SingleControl/SingleSettingGroup">单灯分组</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--Content-->
+<div class="k-body" style="min-height:100%">
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 350px; vertical-align: top;overflow:scroll" id="ctrlTdA">
+                        <form action="~/SingleControl/SingleSettingInspectionSelect" method="post" autocomplete="off">
+                            <span>
+                                电表：
+                                <select id="ammeterName" name="ammeterName">
+                                    @{
+                                        int i = 0;
+                                        foreach (var item in allInfo)
+                                        {
+                                            while (item.ammeterId != ammeter[i].ammeterId)
+                                            {
+                                                i++;
+                                            }
+                                            <option value=@ammeter[i].ammeterName>@ammeter[i].ammeterName</option>
+                                        }
+                                     }
+                                </select>
+                                <input id="ammeterId" name="ammeterId" type="text" value="" placeholder="请输入单灯编号">
+                                <input class="k-btn" type="submit" value="查询">
+                            </span>
+                            </form>
+                    </td>
+                    <td style="vertical-align: top" id="ctrlTdB">
+                        <div style=" background-color: #c0c0c0">
+                            <!--协议分组-->
+                            <div class="k-tabs">
+                                <ul>
+                                    <li class="k-tab"><a href="~/SingleControl/SingleSettingTime">感应时间设置</a></li>
+                                </ul>
+                                <ul>
+                                    <li class="k-tab k-tab-selected"><a href="~/SingleControl/SingleSettingInspection">单灯巡检设置</a></li>
+                                </ul>
+                            </div>
+                            <div id="setarea" style="padding: 10px">
+                                <form action="~/SingleControl/SingleSettingInspectionUpdate" method="post" autocomplete="off">
+                                <!--协议本体-->
+                                <table style="width: 100%">
+                                    <tbody>
+                                        @{ 
+                                                string statime = Convert.ToString(allInfo[0].sigcontrolInsstatime);
+                                                string[] arrsta = statime.Split(':');
+                                                string endtime = Convert.ToString(allInfo[0].sigcontrolInsendtime);
+                                                string[] arrend = endtime.Split(':');
+                                            }
+                                        <tr>
+                                            <td class="kctrl-label">
+                                                @{ 
+                                                    foreach(var item in ammeter)
+                                                    {
+                                                        if(item.ammeterId == allInfo[0].ammeterId)
+                                                        {
+                                                            <span class="k-tab" style="color:brown">@item.ammeterName</span>
+                                                            <input type="text" id="ammeterSwistatus" name="ammeterSwistatus" value=@allInfo[0].ammeterSwistatus hidden="hidden" />
+                                                            <input type="text" id="sigcontrolInsstatime" name="sigcontrolInsstatime" value=@allInfo[0].sigcontrolInsstatime hidden="hidden" />
+                                                            <input type="text" id="sigcontrolInsendtime" name="sigcontrolInsendtime" value=@allInfo[0].sigcontrolInsendtime hidden="hidden" />
+                                                        }
+                                                    }
+                                                }
+                                            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kctrl-label">单灯号：</td>
+                                            <td>
+                                                <input type="text" name="ammeterId" value=@allInfo[0].ammeterId readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kctrl-label">开始时间：</td>
+                                            <td>
+                                                <input type="text" class="k-hour" name="stahour" value=@arrsta[0]>:<input type="text" class="k-min" name="staminute" value=@arrsta[1]>:<input type="text" class="k-sec" name="stasecond" value=@arrsta[2]>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kctrl-label">结束时间：</td>
+                                            <td>
+                                                <input type="text" class="k-hour" name="endhour" value=@arrend[0]>:<input type="text" class="k-min" name="endminute" value=@arrend[1]>:<input type="text" class="k-sec" name="endsecond" value=@arrend[2]>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kctrl-label">报警电流上限：</td>
+                                            <td>
+                                                <input type="text" name="sigcontrolAlacurup" value=@allInfo[0].sigcontrolAlacurup>A
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kctrl-label">报警电流下限：</td>
+                                            <td>
+                                                <input type="text" name="sigcontrolAlacurlow" value=@allInfo[0].sigcontrolAlacurlow>A
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div style="margin-top: 15px">
+                                    <input type="submit" id="btnSendProto" name="oprType" class="k-btn" value="执行">
+                                </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+

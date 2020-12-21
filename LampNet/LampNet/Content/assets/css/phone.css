@@ -1,0 +1,116 @@
+@media screen and (max-width: 768px) {
+    #sharecssChange{
+        margin-left: 5px;
+    }
+
+    #skin-select{
+        width: 243px;
+    }
+
+    #indexFooter{
+        position: initial;
+    }
+
+    #indexFooter{
+        display: none!important;
+    }
+
+    #ctrlTdA,#ctrlTdB{
+        width: 100%!important;
+        display: block;
+    }
+
+    #ctrlTdB div{
+        margin-left: 0!important;
+        margin-top: 15px!important;
+    }
+
+    /*.ali-common-header-inner .menu-dropdown{
+        width: 450px!important;
+        left: 138px!important;
+    }*/
+
+    #skin-select li ul li{
+        border: 0!important;
+    }
+
+    .menuListRight {
+        text-align: left;
+    }
+
+    .menu-dropdown-bd{
+        width: 150px!important;
+    }
+
+}
+@media (max-width:768px){
+    html {
+        min-width: 100%!important;
+        width: 100%;
+        min-height: 100%!important;
+    }
+}
+@media only screen and (max-width:1700px) {
+    .indexListM li{
+        width: 120px;
+    }
+    .indexListM ul{
+        height:60px!important;
+    }
+}
+
+@media only screen and (max-width:1476px) {
+    .indexListM li.indexListMfinal{
+        width: 100%!important;
+    }
+    .indexListM ul{
+        height:60px!important;
+    }
+}
+
+@media only screen and (max-width:1428px) {
+    .indexListM li{
+        width: 80px;
+    }
+
+    .indexListM li.indexListMfinal{
+        width: 100%!important;
+    }
+
+    .indexListM ul{
+        height:60px!important;
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .indexListT h4,.indexListT div{
+        width: 100%!important;
+    }
+}
+
+
+@media only screen and (max-width: 1400px) {
+    .indexListT .pull-right,.indexListT h4{
+        float: none;
+        width: 100%!important;
+    }
+}
+
+/*@media only screen and (min-width: 100px) and (max-width: 640px) {
+	 html{
+        min-width:1200px;
+        min-height:965px;
+    }
+
+    .menu-dropdown{
+    	min-height: 1200px;
+    }
+}*/
+
+
+@media only screen and (max-width:1200px ) {
+    .layoutTop .navbar-right{
+        display: block!important;
+        float: left!important;
+    }
+}

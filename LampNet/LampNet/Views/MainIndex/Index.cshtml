@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>灯联网智慧照明</title>
+    <link href="../Content/reset.css" rel="stylesheet" type="text/css">
+    <link href="../Content/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../Content/Main.css" rel="stylesheet" type="text/css">
+</head>
+<body class="Main_box">
+    <div class="main_head">
+        <p style="display:none"><img src="~/Content/assets/img/home.png" alt="Alternate Text"/> <span>首页</span>  </p>
+        <p class="logo_title">中国城市公共物联网平台--灯联网应用</p>
+        <p>
+            <img src="~/Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user" />
+            <span id="btnQuit" title="注销"><a href="~/Account/Login" style="text-decoration:none;"><img src="~/Content/assets/img/exit.png" alt="Alternate Text" /> 退出</a></span>
+        </p>
+    </div>
+    <div class="menu_box">
+        <ul style="width: 736px; text-align:center;margin-left:200px">
+
+            <li onclick="go('~/ProtectDataUser/Index')">
+                <a href="~/ProtectDataUser/Index" style="text-decoration:none;">
+                    <img src="~/Content/assets/img/MENU2.PNG" style="height: 60px;margin: 46px 0 10px 0;vertical-align: middle;border: 0;">
+                    <p> 运维中心 </p>
+                </a>
+            </li>
+
+            <li>
+                <a href="~/DataScreen/Index" style="text-decoration:none;">
+                    <img src="~/Content/assets/img/MENU8.PNG" style="height: 60px;margin: 46px 0 10px 0;vertical-align: middle;border: 0;">
+                    <p> 数据大屏 </p>
+                </a>
+            </li>
+        </ul>
+        <ul style="width: 736px;text-align:center;margin-left:70px">
+
+            <li>
+                
+                <a href="~/CenterControl/CenterControl" style="text-decoration:none;">
+                    <img src="~/Content/assets/img/MENU4.PNG" style="height: 60px;margin: 46px 0 10px 0;vertical-align: middle;border: 0;">
+                    <p> 控制中心 </p>
+                </a>
+            </li>
+            <li>
+                
+                <a href="~/EnergyData/Index" style="text-decoration:none;">
+                    <img src="~/Content/assets/img/MENU7.PNG" style="height: 60px;margin: 46px 0 10px 0;vertical-align: middle;border: 0;">
+                    <p> 数据中心 </p>
+                </a>
+            </li>
+            <li>
+                <a href="~/App/Index" style="text-decoration:none;">
+                    <img src="~/Content/assets/img/MENU10.PNG" style="height: 60px;margin: 46px 0 10px 0;vertical-align: middle;border: 0;">
+                    <p> 文档中心 </p>
+                </a>
+            </li>
+        </ul>
+        <ul style="width: 736px;text-align:center;margin-left:200px">
+            <li>
+                
+                <a href="~/RunData/Index" style="text-decoration:none;">
+                    <img src="~/Content/assets/img/MENU3.PNG" style="height: 60px;margin: 46px 0 10px 0;vertical-align: middle;border: 0;">
+                    <p> 运行状态 </p>
+                </a>
+            </li>
+            <li>
+                
+                <a href="~/SiteManagement/Index" style="text-decoration:none;">
+                    <img src="~/Content/assets/img/MENU5.PNG" style="height: 60px;margin: 46px 0 10px 0;vertical-align: middle;border: 0;">
+                    <p> 管理中心 </p>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="layer-right" style="display:none">
+        <div class="ivu-drawer-content">
+            <!---->
+            <div class="ivu-drawer-header">
+                <div class="ivu-drawer-header-inner">切换到客户</div>
+            </div>
+
+            <div class="ivu-drawer-body">
+                <div class="input-group">
+                    <input type="text" id="custSerach" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" onclick="serachCust()" type="button">搜索</button>
+                    </span>
+                </div>
+                <div id="custSerachList">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

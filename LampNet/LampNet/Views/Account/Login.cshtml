@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link href="../Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/tip-twitter.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/ktip.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/button.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/Login.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="k-part-top" style="z-index: 199;overflow:hidden">
+        <p class="logo_title">灯联网智慧城市照明管理云平台</p>
+        <p style="float:right;color:#fff;font-size:18px;margin:0;padding-right:120px"></p>
+    </div>
+    <div class="login-main">
+        <div class="login-main-body">
+            <div class="login-bg">
+            </div>
+            <div class="login-holder">
+                <div class="login_tabtitle">
+                </div>
+                <div class="login">
+                    <form action="~/Account/Login" method="post" autocomplete="off">
+                        <table class="login-layout" style="margin-top:60px;">
+                            <tr class="textPrent">
+                                <td>
+                                    <span class="usericon">账号：</span>
+                                    <input type="text" placeholder="请输入账号" id="userId" name="userId" class="userName" />
+                                </td>
+                            </tr>
+                            <tr class="textPrent">
+                                <td>
+                                    <span class="passicon">密码：</span>
+                                    <input type="password" placeholder="请输入密码" class="password" id="userPwd" name="userPwd" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span style="color:#149aa5;font-size:14px;vertical-align:middle;margin-left:10px;cursor:pointer;display:none" class="forgetPassword">忘记密码？</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" id="btnAbs" class="loginbtn" value="登录"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+            </div>
+            <div class="qr_codes">
+                <img src="~/Content/assets/img/app_barcode.png" alt="Alternate Text" />
+                <p>扫码下载灯联网APP</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@{
+    Layout = "~/Views/Shared/DocumentCenter_Layout.cshtml";
+    ViewBag.Title = "App";
+}
+@{
+    TBL_DOCUMENT[] appInfo = ViewBag.appInfo as TBL_DOCUMENT[];
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <form>
+                <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user">
+                <span style="font-size:14px;color:#00c1de">
+                    @ViewBag.user
+                </span>
+
+
+                <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+                <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+            </form>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="~/App/Index">APP下载 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/Document/Index">资料下载 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/ProtectMessage/Index">维护信息 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/Feedback/Index">问题反馈 <i></i></a>
+        </li>
+    </ul>
+</nav>
+<!--Content-->
+<div style="text-align: center; background-color: white">
+    <h2 style="font-family: inherit;font-weight: 500;line-height: 1.1;color: inherit;font-size: 30px;margin-top: 20px;margin-bottom: 10px;text-align: center">灯联网APP</h2>
+    <p style="margin-top:30px;">
+    </p><h4 style="font-family: inherit;font-weight: 500;line-height: 1.1;color: inherit;font-size: 20px;margin-top: 20px;margin-bottom: 10px;text-align: center">手机扫码打开本页面</h4>
+    <img src="@ViewBag.app" style="height:240px;">
+    <p></p>
+    <p style="margin-top:30px;">
+    </p><h4 style="font-family: inherit;font-weight: 500;line-height: 1.1;color: inherit;font-size: 20px;margin-top: 20px;margin-bottom: 10px;text-align: center">选择对应的APP版本下载</h4>
+    <a href="">
+        <span class="k-btn" style="padding:20px;width:240px;margin:10px;">
+            <img src="~/Content/assets/img/icon-android.png" alt="ANDRIOD" style="height:80px;"><br>
+            <span style="font-size:36px;margin:10px;display:inline-block;">ANDROID</span>
+        </span>
+    </a>
+    <a href="" target="_top">
+        <span class="k-btn" style="padding:20px;width:240px;margin:10px;">
+            <img src="~/Content/assets/img/icon-IOS.png" style="height:80px;" alt="IOS"><br>
+            <span style="font-size:36px;margin:10px;display:inline-block;">IOS</span>
+        </span>
+    </a>
+    <p></p>
+</div>
+

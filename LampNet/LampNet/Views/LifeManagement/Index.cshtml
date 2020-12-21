@@ -1,0 +1,214 @@
+﻿@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@model LampNet.Models.TBL_SITE
+@{
+    Layout = "~/Views/Shared/ManagementCenter_Layout.cshtml";
+    ViewBag.Title = "LifeManagementIndex";
+}
+@{
+    TBL_SITE[] allInfo = ViewBag.array as TBL_SITE[];
+    int nowPage = Convert.ToInt32(ViewBag.nowPage);
+    int sumPage = Convert.ToInt32(ViewBag.sumPage);
+}
+
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user" />
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head" href="../SiteManagement/Index">站点管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../AmmeterManagement/Index">电表管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../UserManagement/Index">用户管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="../LifeManagement/Index">生命周期 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../SettingManagement/Index">系统设置 <i></i></a>
+        </li>
+    </ul>
+</nav>
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+    <!--搜索栏-->
+    <div class="page-toolbar">
+            <div class="k-search">
+                    <form action="~/LifeManagement/LifeSelect" method="post" autocomplete="off">
+                        <span class="query">
+                        <span style="float: right">
+                            <span style="color:#333">
+                            站点：
+                            <select name="siteName">
+                            @{ if(allInfo == null)
+                                {
+                                    <option>无</option>
+                                }
+                                else
+                                {
+                                    foreach(var item in allInfo)
+                                    {
+                                        <option value="@item.siteName">@item.siteName</option>
+                                    }
+                                }
+                                
+                            }
+                            </select>
+                            <input id="siteId" name="siteId" type="text" value="" placeholder="请输入站点号">
+                            <input class="k-btn" type="submit" value="查询">
+                            </span>
+                        </span>
+                            </span>
+                    </form>
+            </div>
+    </div>
+    <!--主表-->
+    <div class="k-body Export" id="print">
+        <table class="k-grid table-striped footable-res footable metro-blue footable-loaded" style="display: table;">
+            <thead>
+                <tr class="header">
+                    <th scope="col" data-sort-ignore="true">
+                        <input type="checkbox" id="checkAll">
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点ID</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点名称</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点分组</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点型号</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">采购时间</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">设计寿命(年)</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">已用时长(小时)</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">剩余寿命(小时)</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">剩余寿命百分比</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">状态</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in allInfo)
+            {
+                TimeSpan ts1 = new TimeSpan(DateTime.Now.Ticks);
+                DateTime dt = Convert.ToDateTime(item.sitePurtime);
+                TimeSpan ts2 = new TimeSpan(dt.Ticks);
+                TimeSpan timeSpan = ts1.Subtract(ts2).Duration();
+                float dataUse = Convert.ToSingle(timeSpan.Days.ToString())  + Convert.ToSingle(timeSpan.Hours.ToString());
+                float dataLeft = Convert.ToSingle(item.siteLife * 365 * 24 - dataUse);
+                float per = Convert.ToSingle(dataLeft / (item.siteLife * 365 * 24));
+                per = Convert.ToSingle(Math.Round(per, 4)) * 100;
+                    <tr class="alt">
+                    <td><input type="checkbox" class="checkEq" value=@item.siteId></td>
+                    <td>
+                        <div class="line-">@item.siteId</div>
+                    </td>
+                    <td>
+                        <div class="line- query-eq-info"> @item.siteName</div>
+                    </td>
+                    <td>
+                        <div class="line-">@item.siteGroup</div>
+                    </td>
+                    <td>
+                        <div class="line-">@item.siteModel</div>
+                    </td>
+                        <td>
+                        <div class="line-">@item.sitePurtime</div>
+                    </td>
+                        <td>
+                        <div class="line-">@item.siteLife</div>
+                    </td>
+                        <td>
+                            <div class="line-">@dataUse</div>
+                    </td>
+                        <td>
+                            <div class="line-">@dataLeft</div>
+                        </td>
+                        <td>
+                            <div class="line-">@per %</div>
+                        </td>
+                    <td>
+                        <div class="line-">
+                            @if (@item.siteStatus == 0)
+                            {
+                                <span>正常</span>
+                            }
+                            else if (@item.siteStatus == 1)
+                            {
+                                <span>离线</span>
+                            }
+                            else if (@item.siteStatus == 2)
+                            {
+                                <span>异常</span>
+                            }
+                            else if (@item.siteStatus == 3)
+                            {
+                                <span>警告</span>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+        <!--页面翻页标签-->
+        <div class="pager" style="text-align:right;margin-top:10px">
+            <span class="pageInfo">第@{@nowPage} / @{@sumPage}页，共@{@allInfo.Count()}条记录</span>
+            <span class="disabled">上一页</span>
+            <span class="current">@{@nowPage}</span>
+            <span class="disabled">下一页</span>&nbsp;<span class="jumpPage">跳转到第 <input title="回车跳转到指定页面" type="text" value="1" style="width:20px;text-align: center;"> 页</span>
+            <span class="pageSize">页面大小 30 </span>
+        </div>
+
+    </div>
+</div>
+

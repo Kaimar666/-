@@ -1,0 +1,156 @@
+﻿@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@{
+    Layout = "~/Views/Shared/DocumentCenter_Layout.cshtml";
+    ViewBag.Title = "ProtectMessage";
+}
+@{
+    TBL_DOCUMENT[] protectInfo = ViewBag.protectInfo as TBL_DOCUMENT[];
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user">
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head " href="~/App/Index">APP下载 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/Document/Index">资料下载 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="~/ProtectMessage/Index">维护信息 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/Feedback/Index">问题反馈 <i></i></a>
+        </li>
+    </ul>
+</nav>
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+    <!--搜索栏-->
+    <div class="page-toolbar">
+            <div class="k-search">
+                <form action="~/ProtectMessage/ProcessUploadFiles" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <span class="query">
+                        <span style="float: right">
+                            <input class="k-btn" type="file" id="fileName" name="fileName">
+                            <input class="k-btn" type="submit" value="新增资料">
+                        </span>
+                    </span>
+                </form>
+            </div>
+    </div>
+</div>
+<div class="k-body Export" id="print">
+    <table class="k-grid table-striped footable-res footable metro-blue footable-loaded" style="display: table;">
+        <thead>
+            @{ 
+                int count = protectInfo.Count();
+                int i = 0;
+                while (i < count)
+                {
+
+                    if (i % 3 == 0)
+                    {
+                        <tr class="header">
+                            @if(i < count)
+                            {
+                                <td scope="col" data-sort-ignore="true">
+                                    <div class="vedio">
+                                        <div>
+                                            <a href="">
+                                                <img src="~/Content/assets/img/docment.png" style="width: 180px">
+                                            </a>
+                                        </div>
+                                        <div class="edit">
+                                            <form action="~/ProtectMessage/ProtectMessageDelete" method="post" autocomplete="off">
+                                                <input class="k-btn" value="下载" type="submit"> | <input class="k-btn" value="删除" type="submit">
+                                                <input type="text" value="@protectInfo[i].documentId" id="documentId" name="documentId" hidden="hidden" />
+                                            </form>
+                                        </div>
+                                        <div class="title">
+                                            @protectInfo[i].documentNote
+                                        </div>
+                                        <div class="desc">
+                                            @protectInfo[i].documentTime
+                                        </div>
+                                    </div>
+                                </td>
+                            }
+                            @{ i++;}
+                            @if(i < count)
+                            {
+                                <td scope="col" data-sort-ignore="true">
+                                    <div class="vedio">
+                                        <div>
+                                            <a href="">
+                                                <img src="~/Content/assets/img/docment.png" style="width: 180px">
+                                            </a>
+                                        </div>
+                                        <div class="edit">
+                                            <form action="~/ProtectMessage/ProtectMessageDelete" method="post" autocomplete="off">
+                                                <input class="k-btn" value="下载" type="submit"> | <input class="k-btn" value="删除" type="submit">
+                                                <input type="text" value="@protectInfo[i].documentId" id="documentId" name="documentId" hidden="hidden" />
+                                            </form>
+                                        </div>
+                                        <div class="title">
+                                            @protectInfo[i].documentNote
+                                        </div>
+                                        <div class="desc">
+                                            @protectInfo[i].documentTime
+                                        </div>
+                                    </div>
+                                </td>
+                            }
+                            @{ i++;}
+                            @if(i < count)
+                            {
+                                <td scope="col" data-sort-ignore="true">
+                                    <div class="vedio">
+                                        <div>
+                                            <a href="">
+                                                <img src="~/Content/assets/img/docment.png" style="width: 180px">
+                                            </a>
+                                        </div>
+                                        <div class="edit">
+                                            <form action="~/ProtectMessage/ProtectMessageDelete" method="post" autocomplete="off">
+                                                <input class="k-btn" value="下载" type="submit"> | <input class="k-btn" value="删除" type="submit">
+                                                <input type="text" value="@protectInfo[i].documentId" id="documentId" name="documentId" hidden="hidden" />
+                                            </form>
+                                        </div>
+                                        <div class="title">
+                                            @protectInfo[i].documentNote
+                                        </div>
+                                        <div class="desc">
+                                            @protectInfo[i].documentTime
+                                        </div>
+                                    </div>
+                                </td>
+                            }
+                            @{ i++;}
+                         </tr>
+                    }
+                }
+            }
+        </thead>
+    </table>
+</div>
+

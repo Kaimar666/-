@@ -1,0 +1,216 @@
+﻿
+@using LampNet.Models
+@using System.Data;
+@using System;
+@using System.Collections
+@{
+    Layout = "~/Views/Shared/DataCenter_Layout.cshtml";
+    ViewBag.Title = "ProtectDataUserSelect";
+}
+@{
+    TBL_USER[] userInfo = ViewBag.userInfo as TBL_USER[];
+    TBL_USERPROTECT[] ProtectUserInfo = ViewBag.ProtectUserInfo as TBL_USERPROTECT[];
+    int nowPage = ViewBag.nowPage;
+    int sumPage = ViewBag.sumPage;
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user">
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head" href="~/EnergyData/Index">能耗数据 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="~/ProtectDataUser/Index">运维数据 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="~/RunData/Index">运行数据 <i></i></a>
+        </li>
+    </ul>
+    <div class="shade">
+        <ul class="offset_left">
+            <li>
+                <a class="menuTopLists shade_active" href="~/ProtectDataUser/Index">用户维护数据</a>
+            </li>
+            <li>
+                <a class="menuTopLists " href="~/ProtectDataDevice/Index">设备维护数据</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="k-search">
+
+</div>
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+
+    <!--表格内容-->
+    <div class="k-body">
+        <!--搜索栏-->
+        <div class="page-toolbar">
+
+            <div class="k-search">
+
+                <form action="~/ProtectDataUser/ProtectDataUserSelect" method="post" autocomplete="off">
+                    <span class="query">
+                        <span style="float: left">
+                            <span>用户编号：</span>
+                            <input id="userId" name="userId" type="text" value="" placeholder="请输入用户编号">
+                            <span>操作类型：</span>
+                            <select class="grouping" name="userprotectKind">
+                                <option value="-1">无</option>
+                                <option value="0">Login</option>
+                                <option value="1">Operation</option>
+                            </select>
+                            <span>操作模块：</span>
+                            <select class="grouping" name="userprotectModule">
+                                <option value="-1">无</option>
+                                <option value="1">站点管理</option>
+                                <option value="2">电表管理</option>
+                                <option value="3">生命管理</option>
+                                <option value="4">用户管理</option>
+                                <option value="5">系统管理</option>
+                            </select>
+                            <input class="k-btn" type="submit" value="查询">
+                        </span>
+                    </span>
+                </form>
+
+            </div>
+        </div>
+        <div class="k-body Export" id="print">
+            <table class="k-grid table-striped footable-res footable metro-blue footable-loaded" style="display: table;">
+                <thead>
+                    <tr class="header">
+                        <th scope="col" class="footable-sortable">
+                            <a href="">用户ID</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">姓名</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">操作类型</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">操作模块</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">登录信息</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                        <th scope="col" class="footable-sortable">
+                            <a href="">操作时间</a>
+                            <span class="footable-sort-indicator"></span>
+                        </th>
+                    </tr>
+
+                    @{
+
+                        foreach (var item in ProtectUserInfo)
+                        {
+                            <tr class="alt">
+                                <td>
+                                    <div class="line-">@item.userId</div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            int i = 0;
+                                            while (i < userInfo.Count())
+                                            {
+                                                if (item.userId == userInfo[i].userId)
+                                                {
+                                                    <span>@userInfo[i].userName</span>
+                                                    break;
+                                                }
+                                                i++;
+                                            }
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            if (@item.userprotectKind == 0)
+                                            {
+                                                <span>Login</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Operation</span>
+                                            }
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">
+                                        @{
+                                            if (@item.userprotectModule == 1)
+                                            {
+                                                <span>站点管理</span>
+                                            }
+                                            else if (@item.userprotectModule == 2)
+                                            {
+                                                <span>电表管理</span>
+                                            }
+                                            else if (@item.userprotectModule == 3)
+                                            {
+                                                <span>生命管理</span>
+                                            }
+                                            else if (@item.userprotectModule == 4)
+                                            {
+                                                <span>用户管理</span>
+                                            }
+                                            else if (@item.userprotectModule == 5)
+                                            {
+                                                <span>系统管理</span>
+                                            }
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="line-">@item.userprotectLoginfo</div>
+                                </td>
+                                <td>
+                                    <div class="line-">@item.userprotectOpttime</div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!--页面翻页-->
+    <div class="pager" style="text-align:right">
+        <span class="pageInfo">第@{@nowPage} / @{@sumPage}页，共@{@ProtectUserInfo.Count()}条记录</span>
+        <span class="disabled">上一页</span>
+        <span class="current">@{@nowPage}</span>
+        <span class="disabled">下一页</span>&nbsp;<span class="jumpPage">跳转到第 <input title="回车跳转到指定页面" type="text" value="1" style="width:20px;text-align: center;"> 页</span>
+        <span class="pageSize">页面大小 <input id="size" title="回车指定页面大小" type="text" value="30" style="width: 30px; text-align: center;"> </span>
+    </div>
+</div>
+

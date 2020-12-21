@@ -1,0 +1,250 @@
+﻿
+
+@using LampNet.Models
+@using System.Collections
+@model LampNet.Models.TBL_AMMETER
+@{
+    Layout = "~/Views/Shared/ManagementCenter_Layout.cshtml";
+    ViewBag.Title = "AmmeterSelect";
+}
+@{
+    TBL_AMMETER[] allInfo = ViewBag.allInfo as TBL_AMMETER[];
+    TBL_AMMETER[] info = ViewBag.info as TBL_AMMETER[];
+    ArrayList SiteName = ViewBag.SiteName as ArrayList;
+    int nowPage = Convert.ToInt32(ViewBag.nowPage);
+    int sumPage = Convert.ToInt32(ViewBag.sumPage);
+}
+<!--Head-->
+<nav class="hl_nav" id="indexNavTop">
+    <div class="head_box">
+        <div class="head_left">
+            <a href="~/MainIndex/Index"><img src="../Content/assets/img/Logo1.png" title="首页" style="max-height: 50px;border: 0;vertical-align: middle;" /></a><span style="display:none">中国铁塔城市公共物联网平台--灯联网应用</span>
+        </div>
+
+        <div class="head_right">
+            <img src="../Content/assets/img/headImg.png" alt="Alternate Text" id="userInfo" title="@ViewBag.user" />
+            <span style="font-size:14px;color:#00c1de">
+                @ViewBag.user
+            </span>
+
+            <a href="~/MainIndex/Index" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/g.png" alt="Alternate Text" id="switchAdmin" title="回到首页">首页</a>
+            <a href="~/Account/Login" style="text-decoration:none;width:22px;height:22px;display:inline;color: #5b96bc;font-size: 14px;"><img src="../Content/assets/img/tc.png" alt="Alternate Text" id="btnQuit" title="注销">注销</a>
+        </div>
+    </div>
+    <!--二级菜单-->
+    <ul class="nav_list">
+        <li class=" ">
+            <a class="nav_head" href="../SiteManagement/Index">站点管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head shadeActiveli" href="../AmmeterManagement/Index">电表管理 <i class="block"></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../UserManagement/Index">用户管理 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../LifeManagement/Index">生命周期 <i></i></a>
+        </li>
+        <li class=" ">
+            <a class="nav_head" href="../SettingManagement/Index">系统设置 <i></i></a>
+        </li>
+    </ul>
+    <!--三级菜单-->
+    <div class="shade">
+        <ul class="offset_left"></ul>
+    </div>
+</nav>
+<!--Content-->
+<div class="layoutContent container-fluid bevel wrap-fluid clearfix" id="sharecssChange" style="background: #fff;">
+    <!--搜索栏-->
+    <div class="page-toolbar">
+        <div class="k-search">
+            <form action="~/AmmeterManagement/AmmeterSelect" method="post" autocomplete="off">
+                <span class="query">
+                    <span style="float: right">
+                        <span style="color:#333">
+                            电表：
+                            <select name="ammeterName">
+                                @{ if (allInfo == null)
+                                    {
+                                        <option>无</option>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in allInfo)
+                                        {
+                                            <option value="@item.ammeterName">@item.ammeterName</option>
+                                        }
+                                    }
+
+                                }
+                            </select>
+                            <input id="ammeterId" name="ammeterId" type="text" value="" placeholder="请输入电表号">
+                            <input class="k-btn" type="submit" value="查询">
+                        </span>
+                    </span>
+                </span>
+            </form>
+        </div>
+    </div>
+    <!--主表-->
+    <div class="k-body Export" id="print">
+        <table class="k-grid table-striped footable-res footable metro-blue footable-loaded" style="display: table;">
+            <thead>
+                <tr class="header">
+                    <th scope="col" data-sort-ignore="true">
+                        <input type="checkbox" id="checkAll">
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">站点名称</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">电表编号</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">电表名称</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">电表型号</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">电表分组</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">参考功率</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">原负载</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">新负载</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">费率</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">状态</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">开关状态</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" class="footable-sortable">
+                        <a href="">设计寿命</a>
+                        <span class="footable-sort-indicator"></span>
+                    </th>
+                    <th scope="col" data-sort-ignore="true">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int count = 0;
+
+                    foreach (var item in info)
+                    {
+                        <tr class="alt">
+                            <td><input type="checkbox" class="checkEq" value=@item.ammeterId></td>
+                            <td>
+                                <div class="line-">@SiteName[count++]</div>
+                            </td>
+                            <td>
+                                <div class="line- query-eq-info"> @item.ammeterId</div>
+                            </td>
+                            <td>
+                                <div class="line- query-eq-info"> @item.ammeterName</div>
+                            </td>
+                            <td>
+                                <div class="line-">@item.ammeterModel</div>
+                            </td>
+                            <td>
+                                <div class="line-">@item.ammeterGroup</div>
+                            </td>
+                            <td>
+                                <div class="line-">@item.ammeterRefpower</div>
+                            </td>
+                            <td>
+                                <div class="line-">@item.ammeterOldload</div>
+                            </td>
+                            <td>
+                                <div class="line-">@item.ammeterNewload</div>
+                            </td>
+                            <td>
+                                <div class="line-">@item.ammeterRate</div>
+                            </td>
+                            <td>
+                                <div class="line-">
+                                    @if (@item.ammeterStatus == 0)
+                                    {
+                                        <span>正常</span>
+                                    }
+                                    else if (@item.ammeterStatus == 1)
+                                    {
+                                        <span>离线</span>
+                                    }
+                                    else if (@item.ammeterStatus == 2)
+                                    {
+                                        <span>异常</span>
+                                    }
+                                    else if (@item.ammeterStatus == 3)
+                                    {
+                                        <span>警告</span>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <div class="line-">
+                                    @if (@item.ammeterSwistatus == 0)
+                                    {
+                                        <span>关</span>
+                                    }
+                                    else if (@item.ammeterSwistatus == 1)
+                                    {
+                                        <span>开</span>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <div class="line-">@item.ammeterLife</div>
+                            </td>
+                            <td class="none_d">
+                                <form action="~/AmmeterManagement/AmmeterDelete" method="get" autocomplete="off">
+                                    <div style="text-align: center">
+                                        <input type="text" id="ammeterId" name="ammeterId" value=@item.ammeterId hidden="hidden" />
+                                        <input class="k-btn" type="submit" value="编辑">
+                                        <input class="k-btn" type="submit" value="删除">
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+
+        <!--页面翻页标签-->
+        <div class="pager" style="text-align:right;margin-top:10px">
+            <span class="pageInfo">第@{@nowPage} / @{@sumPage}页，共@{@allInfo.Count()}条记录</span>
+            <span class="disabled">上一页</span>
+            <span class="current">@{@nowPage}</span>
+            <span class="disabled">下一页</span>&nbsp;<span class="jumpPage">跳转到第 <input title="回车跳转到指定页面" type="text" value="1" style="width:20px;text-align: center;"> 页</span>
+            <span class="pageSize">页面大小 30 </span>
+        </div>
+
+    </div>
+</div>
+
+
+
